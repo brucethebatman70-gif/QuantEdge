@@ -83,32 +83,32 @@ export default function RegisterPage() {
             <div className="space-y-2">
               <Label htmlFor="firstName">First name</Label>
               <Input id="firstName" placeholder="John" {...register("firstName")} />
-              {errors.firstName && <p className="text-xs text-error">{errors.firstName.message}</p>}
+              {errors.firstName && <motion.p initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} className="text-xs text-error">{errors.firstName.message}</motion.p>}
             </div>
             <div className="space-y-2">
               <Label htmlFor="lastName">Last name</Label>
               <Input id="lastName" placeholder="Doe" {...register("lastName")} />
-              {errors.lastName && <p className="text-xs text-error">{errors.lastName.message}</p>}
+              {errors.lastName && <motion.p initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} className="text-xs text-error">{errors.lastName.message}</motion.p>}
             </div>
           </div>
 
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
             <Input id="email" type="email" placeholder="hello@example.com" autoComplete="email" {...register("email")} />
-            {errors.email && <p className="text-xs text-error">{errors.email.message}</p>}
+            {errors.email && <motion.p initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} className="text-xs text-error">{errors.email.message}</motion.p>}
           </div>
 
           <div className="space-y-2">
             <Label htmlFor="password">Password</Label>
             <PasswordInput id="password" placeholder="Create a strong password" autoComplete="new-password" {...register("password")} />
-            {errors.password && <p className="text-xs text-error">{errors.password.message}</p>}
+            {errors.password && <motion.p initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} className="text-xs text-error">{errors.password.message}</motion.p>}
             <PasswordStrength password={password || ""} />
           </div>
 
           <div className="space-y-2">
             <Label htmlFor="confirmPassword">Confirm password</Label>
             <PasswordInput id="confirmPassword" placeholder="Repeat your password" autoComplete="new-password" {...register("confirmPassword")} />
-            {errors.confirmPassword && <p className="text-xs text-error">{errors.confirmPassword.message}</p>}
+            {errors.confirmPassword && <motion.p initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} className="text-xs text-error">{errors.confirmPassword.message}</motion.p>}
           </div>
 
           <div className="flex items-start gap-2">
@@ -125,7 +125,7 @@ export default function RegisterPage() {
               <Link href="/privacy" className="text-primary hover:underline">Privacy Policy</Link>
             </Label>
           </div>
-          {errors.acceptTerms && <p className="text-xs text-error">{errors.acceptTerms.message}</p>}
+          {errors.acceptTerms && <motion.p initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} className="text-xs text-error">{errors.acceptTerms.message}</motion.p>}
 
           <Button type="submit" className="w-full" size="lg" disabled={isLoading}>
             {isLoading ? (

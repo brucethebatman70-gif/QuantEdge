@@ -22,11 +22,13 @@ export default function OnboardingPage() {
   const back = () => { if (step > 1) setStep(s => s - 1); else router.push("/"); };
 
   const selectableGrid = <T extends string>(items: T[], selected: T | T[] | undefined, onSelect: (v: T) => void, multi = false) => (
-    <div className="grid grid-cols-2 gap-3">
+    <div className="grid grid-cols-2 gap-3" role={multi ? "group" : "radiogroup"}>
       {items.map((item) => {
         const isSelected = multi ? (selected as T[])?.includes(item) : selected === item;
         return (
           <button key={item} onClick={() => onSelect(item)}
+            role={multi ? "checkbox" : "radio"}
+            aria-checked={isSelected}
             className={cn("rounded-xl border p-4 text-sm font-medium text-left transition-all duration-200 hover:border-primary/50 hover:bg-primary/5",
               isSelected ? "border-primary bg-primary/10 text-primary shadow-sm" : "border-border bg-card text-foreground")}>
             <span className="capitalize">{item.replace(/-/g, " ")}</span>
@@ -178,7 +180,14 @@ export default function OnboardingPage() {
           <div className="mb-8">
             <div className="flex items-center justify-between mb-4">
               <span className="text-xs text-muted-foreground">Step {step} of {totalSteps}</span>
-              <div className="flex gap-1">
+              <div
+                className="flex gap-1"
+                role="progressbar"
+                aria-valuenow={step}
+                aria-valuemin={1}
+                aria-valuemax={totalSteps}
+                aria-label={`Onboarding progress: step ${step} of ${totalSteps}`}
+              >
                 {Array.from({ length: totalSteps }, (_, i) => (
                   <div key={i} className={cn("h-1 w-8 rounded-full transition-all duration-300", i + 1 <= step ? "bg-primary" : "bg-muted")} />
                 ))}

@@ -18,6 +18,7 @@ import { forgotPasswordSchema, type ForgotPasswordFormData } from "@/lib/auth/sc
 export default function ForgotPasswordPage() {
   const { resetPassword, isLoading } = useAuthStore();
   const [sent, setSent] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const {
     register,
@@ -28,8 +29,13 @@ export default function ForgotPasswordPage() {
   });
 
   const onSubmit = async (data: ForgotPasswordFormData) => {
-    await resetPassword(data.email);
-    setSent(true);
+    setError(null);
+    try {
+      await resetPassword(data.email);
+      setSent(true);
+    } catch {
+      setError("Failed to send reset link. Please try again.");
+    }
   };
 
   if (sent) {
@@ -91,6 +97,15 @@ export default function ForgotPasswordPage() {
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          {error && (
+            <motion.div
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="rounded-lg bg-error/10 border border-error/20 p-3 text-sm text-error"
+            >
+              {error}
+            </motion.div>
+          )}
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
             <Input id="email" type="email" placeholder="hello@example.com" autoComplete="email" {...register("email")} />

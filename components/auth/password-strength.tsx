@@ -28,7 +28,14 @@ export function PasswordStrength({ password }: PasswordStrengthProps) {
 
   return (
     <div className="space-y-1">
-      <div className="flex gap-1">
+      <div
+        role="progressbar"
+        aria-valuenow={score}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-label={`Password strength: ${label}`}
+        className="flex gap-1"
+      >
         {[1, 2, 3, 4].map((segment) => (
           <div
             key={segment}

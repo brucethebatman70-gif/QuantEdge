@@ -49,6 +49,7 @@ import {
   Check,
   Sparkles,
   ArrowRight,
+  Monitor,
   type LucideIcon,
 } from "lucide-react";
 
@@ -103,6 +104,7 @@ export const Icons: Record<string, LucideIcon> = {
   Check,
   Sparkles,
   ArrowRight,
+  Monitor,
 };
 
 export type IconName = keyof typeof Icons;
