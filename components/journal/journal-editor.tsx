@@ -25,6 +25,13 @@ export function JournalEditor() {
   const [activeSection, setActiveSection] = useState<EditorTab>("notes");
   const [showTemplatePicker, setShowTemplatePicker] = useState(false);
 
+  const update = useMemo(() => {
+    return (updates: Partial<JournalEntry>) => {
+      if (!editingEntry) return;
+      updateEntry(editingEntry.id, updates);
+    };
+  }, [editingEntry, updateEntry]);
+
   const sectionCount = useMemo(() => {
     if (!editingEntry) return 0;
     let count = 0;
@@ -55,12 +62,6 @@ export function JournalEditor() {
       </div>
     );
   }
-
-  const update = useMemo(() => {
-    return (updates: Partial<JournalEntry>) => {
-      updateEntry(editingEntry.id, updates);
-    };
-  }, [editingEntry?.id, updateEntry]);
 
   const applyTemplate = (template: JournalTemplate) => {
     updateEntry(editingEntry.id, {
