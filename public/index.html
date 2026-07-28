@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QuantEdge — AI Trading Operating System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --accent: #06b6d4;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --error: #ef4444;
+      --bg: #0c0c0f;
+      --bg-card: #141417;
+      --bg-muted: #18181b;
+      --fg: #fafafa;
+      --fg-muted: #a1a1aa;
+      --border: #27272a;
+      --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    ::selection { background: var(--primary); color: #fff; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(99,102,241,0.12) 0%, transparent 60%),
+                  radial-gradient(ellipse at 80% 80%, rgba(6,182,212,0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      background: rgba(99,102,241,0.1);
+      border: 1px solid rgba(99,102,241,0.2);
+      font-size: 12px;
+      color: var(--primary);
+      font-weight: 500;
+      margin-bottom: 24px;
+      letter-spacing: 0.02em;
+    }
+    .hero-logo {
+      width: 72px;
+      height: 72px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      box-shadow: 0 0 40px rgba(99,102,241,0.3);
+    }
+    .hero-logo svg { width: 36px; height: 36px; }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #fafafa 0%, #a1a1aa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--fg-muted);
+      max-width: 600px;
+      margin-bottom: 32px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 0 20px rgba(99,102,241,0.25);
+    }
+    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent;
+      color: var(--fg);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { background: var(--bg-muted); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--fg-muted);
+    }
+    .btn-ghost:hover { color: var(--fg); }
+
+    /* Section */
+    .section {
+      padding: 80px 0;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .section-header h2 {
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .section-header p {
+      color: var(--fg-muted);
+      font-size: 1rem;
+    }
+
+    /* Features Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      transition: all 0.3s;
+    }
+    .feature-card:hover {
+      border-color: rgba(99,102,241,0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    }
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+    .feature-card h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .feature-card p {
+      font-size: 13px;
+      color: var(--fg-muted);
+      line-height: 1.7;
+    }
+
+    /* Screenshots */
+    .screenshots-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 20px;
+    }
+    .screenshot-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+    .screenshot-card:hover {
+      border-color: rgba(99,102,241,0.3);
+      transform: translateY(-2px);
+    }
+    .screenshot-preview {
+      aspect-ratio: 16/10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .screenshot-preview svg { width: 100%; height: 100%; }
+    .screenshot-info {
+      padding: 16px 20px;
+      border-top: 1px solid var(--border);
+    }
+    .screenshot-info h4 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .screenshot-info p {
+      font-size: 12px;
+      color: var(--fg-muted);
+    }
+
+    /* Stack */
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+    }
+    .stack-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 20px;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .stack-item:hover { border-color: rgba(99,102,241,0.3); }
+    .stack-item .label { font-size: 12px; font-weight: 600; }
+    .stack-item .value { font-size: 10px; color: var(--fg-muted); margin-top: 4px; font-family: var(--font-mono); }
+
+    /* Stats */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+    }
+    .stat-card .number {
+      font-size: 28px;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .stat-card .desc {
+      font-size: 12px;
+      color: var(--fg-muted);
+      margin-top: 4px;
+    }
+
+    /* Routes */
+    .routes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 8px;
+    }
+    .route-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 13px;
+      transition: all 0.2s;
+    }
+    .route-item:hover { border-color: rgba(99,102,241,0.3); }
+    .route-path {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--primary);
+    }
+    .route-label { color: var(--fg-muted); margin-left: auto; font-size: 11px; }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 0;
+      text-align: center;
+      color: var(--fg-muted);
+      font-size: 12px;
+    }
+
+    /* Divider */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin: 0 auto;
+      max-width: 600px;
+    }
+
+    @media (max-width: 600px) {
+      .features-grid { grid-template-columns: 1fr; }
+      .screenshots-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <div class="hero-badge">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      v0.1.0 — Enterprise Build
+    </div>
+    <div class="hero-logo">
+      <svg viewBox="0 0 48 48" fill="none">
+        <path d="M14 30L20 18L26 26L32 14L36 22" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <h1>Quant<span>Edge</span></h1>
+    <p>AI-Powered Trading Operating System — an institutional-grade trading workspace combining journaling, analytics, replay, backtesting, and AI coaching.</p>
+    <div class="hero-actions">
+      <a href="http://localhost:3000" class="btn btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        Launch App
+      </a>
+      <a href="#features" class="btn btn-outline">Explore Features</a>
+      <a href="#stack" class="btn btn-ghost">Tech Stack</a>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="number">12</div>
+          <div class="desc">Application Routes</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">16</div>
+          <div class="desc">UI Components</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">20+</div>
+          <div class="desc">Premium Libraries</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">0</div>
+          <div class="desc">Build Errors</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="features">
+    <div class="container">
+      <div class="section-header">
+        <h2>Everything a Trader Needs</h2>
+        <p>Twelve integrated modules for professional trading</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(99,102,241,0.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg></div>
+          <h3>Dashboard</h3>
+          <p>Real-time P&L stats, equity curve visualization, win/loss ratio, and goals progress — all in one place.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(16,185,129,0.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5A2.5 2.5 0 0 1 4 19.5z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+          <h3>Trading Journal</h3>
+          <p>Log every trade with entry/exit, P&L tracking, tags, and notes. Searchable table with long/short filters.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(6,182,212,0.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+          <h3>Analytics</h3>
+          <p>Monthly P&L bars, win rate by day, setup performance, symbol breakdown. Multi-tab deep analytics.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(245,158,11,0.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg></div>
+          <h3>Trade Replay</h3>
+          <p>Replay past market conditions with speed controls, symbol search, and date range filtering.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(99,102,241,0.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2"><path d="M10 2v2M14 2v2M4.93 4.93l1.41 1.41M18.07 4.93l-1.41 1.41M3 10h2M19 10h2M9 16l4-4 4 4"/><rect x="4" y="14" width="16" height="8" rx="2"/></svg></div>
+          <h3>Backtesting</h3>
+          <p>Validate strategies with saved backtests, results comparison chart, and parameter optimizer.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(16,185,129,0.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+          <h3>AI Trading Coach</h3>
+          <p>Interactive AI chat with performance analysis, smart insights, and personalized coaching recommendations.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(6,182,212,0.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+          <h3>Strategy Playbooks</h3>
+          <p>Documented trading strategies with setup, entry, exit, and risk management rules. Apply with one click.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(245,158,11,0.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg></div>
+          <h3>Reports</h3>
+          <p>Generate performance reports, tax summaries, strategy comparisons, and risk assessments.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(99,102,241,0.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+          <h3>Goals</h3>
+          <p>Set and track trading goals with visual progress bars. Daily, weekly, monthly, and yearly targets.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(16,185,129,0.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+          <h3>Settings</h3>
+          <p>Profile management, theme preferences, sound toggles, chart defaults, and timeframe configuration.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="screenshots">
+    <div class="container">
+      <div class="section-header">
+        <h2>Visual Preview</h2>
+        <p>Beautiful, minimal, institutional-grade interface</p>
+      </div>
+      <div class="screenshots-grid">
+        <div class="screenshot-card">
+          <div class="screenshot-preview" style="background: linear-gradient(135deg, rgba(99,102,241,0.05), rgba(6,182,212,0.05));">
+            <svg viewBox="0 0 400 220">
+              <rect x="0" y="0" width="400" height="220" rx="8" fill="var(--bg-card)"/>
+              <rect x="12" y="12" width="376" height="1" fill="var(--border)"/>
+              <rect x="12" y="26" width="80" height="14" rx="4" fill="var(--bg-muted)"/>
+              <rect x="12" y="48" width="180" height="32" rx="6" fill="rgba(16,185,129,0.15)"/>
+              <rect x="200" y="48" width="85" height="32" rx="6" fill="rgba(99,102,241,0.1)"/>
+              <rect x="293" y="48" width="95" height="32" rx="6" fill="rgba(6,182,212,0.1)"/>
+              <path d="M12 120 Q50 80 100 100 Q140 70 180 90 Q220 60 260 80 Q300 50 340 70 Q370 55 388 65" fill="none" stroke="var(--primary)" stroke-width="2"/>
+              <path d="M12 120 Q50 90 100 110 Q140 80 180 98 Q220 70 260 88 Q300 60 340 78 Q370 62 388 72" fill="none" stroke="rgba(99,102,241,0.15)" stroke-width="12"/>
+              <rect x="12" y="140" width="376" height="1" fill="var(--border)"/>
+              <rect x="12" y="152" width="50" height="10" rx="3" fill="var(--bg-muted)"/>
+              <rect x="72" y="154" width="30" height="6" rx="3" fill="var(--bg-muted)"/>
+            </svg>
+          </div>
+          <div class="screenshot-info">
+            <h4>Dashboard</h4>
+            <p>Statistics grid, equity curve, recent trades, monthly chart, goals progress</p>
+          </div>
+        </div>
+        <div class="screenshot-card">
+          <div class="screenshot-preview" style="background: linear-gradient(135deg, rgba(16,185,129,0.05), rgba(99,102,241,0.05));">
+            <svg viewBox="0 0 400 220">
+              <rect x="0" y="0" width="400" height="220" rx="8" fill="var(--bg-card)"/>
+              <rect x="12" y="12" width="376" height="1" fill="var(--border)"/>
+              <rect x="12" y="26" width="60" height="14" rx="4" fill="var(--bg-muted)"/>
+              <rect x="12" y="48" width="376" height="24" rx="6" fill="var(--bg-card)"/>
+              <rect x="12" y="50" width="12" height="20" rx="2" fill="rgba(99,102,241,0.3)"/>
+              <text x="30" y="64" font-size="9" fill="var(--fg)">AAPL</text>
+              <rect x="90" y="54" width="24" height="12" rx="4" fill="rgba(16,185,129,0.2)"/>
+              <text x="96" y="63" font-size="7" fill="#10b981">L</text>
+              <text x="140" y="64" font-size="9" fill="var(--fg-muted)" font-family="monospace">$245.80</text>
+              <text x="210" y="64" font-size="9" fill="var(--fg-muted)" font-family="monospace">$253.40</text>
+              <text x="310" y="64" font-size="9" fill="#10b981">+$760.00</text>
+              <rect x="12" y="80" width="376" height="24" rx="6" fill="var(--bg-card)"/>
+              <rect x="12" y="82" width="12" height="20" rx="2" fill="rgba(239,68,68,0.3)"/>
+              <text x="30" y="96" font-size="9" fill="var(--fg)">TSLA</text>
+              <rect x="90" y="86" width="24" height="12" rx="4" fill="rgba(239,68,68,0.2)"/>
+              <text x="96" y="95" font-size="7" fill="#ef4444">S</text>
+              <text x="140" y="96" font-size="9" fill="var(--fg-muted)" font-family="monospace">$268.50</text>
+              <text x="210" y="96" font-size="9" fill="var(--fg-muted)" font-family="monospace">$264.20</text>
+              <text x="310" y="96" font-size="9" fill="#ef4444">-$215.00</text>
+            </svg>
+          </div>
+          <div class="screenshot-info">
+            <h4>Trading Journal</h4>
+            <p>Full trade log with search, filters, tags, setup tracking, and P&L coloring</p>
+          </div>
+        </div>
+        <div class="screenshot-card">
+          <div class="screenshot-preview" style="background: linear-gradient(135deg, rgba(6,182,212,0.05), rgba(99,102,241,0.05));">
+            <svg viewBox="0 0 400 220">
+              <rect x="0" y="0" width="400" height="220" rx="8" fill="var(--bg-card)"/>
+              <rect x="12" y="12" width="376" height="1" fill="var(--border)"/>
+              <rect x="12" y="26" width="80" height="14" rx="4" fill="var(--bg-muted)"/>
+              <rect x="12" y="50" width="85" height="140" rx="6" fill="var(--bg-card)"/>
+              <circle cx="55" cy="110" r="30" fill="none" stroke="var(--success)" stroke-width="8" stroke-dasharray="151 76"/>
+              <circle cx="55" cy="110" r="30" fill="none" stroke="var(--error)" stroke-width="8" stroke-dasharray="76 151" stroke-dashoffset="-151"/>
+              <text x="55" y="115" font-size="14" fill="var(--fg)" font-weight="700" text-anchor="middle">68%</text>
+              <rect x="110" y="50" width="278" height="60" rx="6" fill="var(--bg-card)"/>
+              <rect x="120" y="62" width="20" height="36" rx="3" fill="var(--success)"/>
+              <rect x="148" y="78" width="20" height="20" rx="3" fill="var(--error)"/>
+              <rect x="176" y="52" width="20" height="46" rx="3" fill="var(--success)"/>
+              <rect x="204" y="70" width="20" height="28" rx="3" fill="var(--success)"/>
+              <rect x="232" y="82" width="20" height="16" rx="3" fill="var(--error)"/>
+              <rect x="110" y="120" width="278" height="70" rx="6" fill="var(--bg-card)"/>
+            </svg>
+          </div>
+          <div class="screenshot-info">
+            <h4>Analytics</h4>
+            <p>Win rate donut, monthly P&L bars, win/loss by day, setup performance, symbol table</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="stack">
+    <div class="container">
+      <div class="section-header">
+        <h2>Tech Stack</h2>
+        <p>Built with modern, battle-tested technologies</p>
+      </div>
+      <div class="stack-grid">
+        <div class="stack-item"><div class="label">Next.js</div><div class="value">16.2.12</div></div>
+        <div class="stack-item"><div class="label">React</div><div class="value">19.2.4</div></div>
+        <div class="stack-item"><div class="label">TypeScript</div><div class="value">5</div></div>
+        <div class="stack-item"><div class="label">Tailwind CSS</div><div class="value">v4</div></div>
+        <div class="stack-item"><div class="label">Framer Motion</div><div class="value">12</div></div>
+        <div class="stack-item"><div class="label">Lucide Icons</div><div class="value">0.511</div></div>
+        <div class="stack-item"><div class="label">Radix UI</div><div class="value">12 primitives</div></div>
+        <div class="stack-item"><div class="label">Zustand</div><div class="value">5</div></div>
+        <div class="stack-item"><div class="label">Turbopack</div><div class="value">default</div></div>
+        <div class="stack-item"><div class="label">Sonner</div><div class="value">2</div></div>
+        <div class="stack-item"><div class="label">Recharts</div><div class="value">2</div></div>
+        <div class="stack-item"><div class="label">React Hook Form</div><div class="value">7</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="routes">
+    <div class="container">
+      <div class="section-header">
+        <h2>Application Routes</h2>
+        <p>Twelve routes across dashboard and auth</p>
+      </div>
+      <div class="routes-grid">
+        <div class="route-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          <span class="route-path">/</span>
+          <span class="route-label">Dashboard</span>
+        </div>
+        <div class="route-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5A2.5 2.5 0 0 1 4 19.5z"/></svg>
+          <span class="route-path">/journal</span>
+          <span class="route-label">Trading Journal</span>
+        </div>
+        <div class="route-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          <span class="route-path">/analytics</span>
+          <span class="route-label">Analytics</span>
+        </div>
+        <div class="route-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--warning)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+          <span class="route-path">/replay</span>
+          <span class="route-label">Trade Replay</span>
+        </div>
+        <div class="route-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M10 2v2M14 2v2"/><rect x="4" y="14" width="16" height="8" rx="2"/></svg>
+          <span class="route-path">/backtesting</span>
+          <span class="route-label">Backtesting</span>
+        </div>
+        <div class="route-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <span class="route-path">/coach</span>
+          <span class="route-label">AI Coach</span>
+        </div>
+        <div class="route-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/></svg>
+          <span class="route-path">/playbooks</span>
+          <span class="route-label">Playbooks</span>
+        </div>
+        <div class="route-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--warning)" stroke-width="2"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>
+          <span class="route-path">/reports</span>
+          <span class="route-label">Reports</span>
+        </div>
+        <div class="route-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+          <span class="route-path">/goals</span>
+          <span class="route-label">Goals</span>
+        </div>
+        <div class="route-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          <span class="route-path">/settings</span>
+          <span class="route-label">Settings</span>
+        </div>
+        <div class="route-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--fg-muted)" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v1"/></svg>
+          <span class="route-path">/login</span>
+          <span class="route-label">Login</span>
+        </div>
+        <div class="route-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--fg-muted)" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v1"/></svg>
+          <span class="route-path">/register</span>
+          <span class="route-label">Register</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section">
+    <div class="container" style="text-align:center;">
+      <h2 style="font-size:1.5rem;font-weight:700;margin-bottom:8px;">Ready to Launch?</h2>
+      <p style="color:var(--fg-muted);font-size:14px;margin-bottom:24px;">Open the app on localhost:3000 to explore every feature.</p>
+      <a href="http://localhost:3000" class="btn btn-primary" style="font-size:16px;padding:14px 32px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        Launch QuantEdge
+      </a>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="container">
+      <p>Built with Next.js 16, React 19, Tailwind CSS v4, and 20+ premium libraries</p>
+      <p style="margin-top:4px;">QuantEdge Technologies Inc. &copy; 2026</p>
+    </div>
+  </div>
+</body>
+</html>
