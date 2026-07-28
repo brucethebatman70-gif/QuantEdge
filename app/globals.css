@@ -64,11 +64,11 @@
 }
 
 :root {
-  --background: #ffffff;
+  --background: #f8f8fa;
   --foreground: #09090b;
-  --primary: #6366f1;
-  --primary-foreground: #ffffff;
-  --muted: #f4f4f5;
+  --primary: #00D4AA;
+  --primary-foreground: #0C0C0F;
+  --muted: #f0f0f2;
   --muted-foreground: #71717a;
   --card: #ffffff;
   --card-foreground: #09090b;
@@ -76,9 +76,9 @@
   --popover-foreground: #09090b;
   --border: #e4e4e7;
   --input: #e4e4e7;
-  --ring: #6366f1;
-  --accent: #06b6d4;
-  --accent-foreground: #ffffff;
+  --ring: #00D4AA;
+  --accent: #06E0FF;
+  --accent-foreground: #0C0C0F;
   --success: #10b981;
   --warning: #f59e0b;
   --error: #ef4444;
@@ -86,37 +86,37 @@
   --sidebar: #fafafa;
   --sidebar-foreground: #27272a;
   --sidebar-border: #e4e4e7;
-  --sidebar-accent: #f4f4f5;
+  --sidebar-accent: #f0f0f2;
   --sidebar-accent-foreground: #09090b;
   --glass-bg: rgba(255, 255, 255, 0.7);
   --glass-border: rgba(255, 255, 255, 0.1);
 }
 
 .dark {
-  --background: #0c0c0f;
-  --foreground: #fafafa;
-  --primary: #818cf8;
-  --primary-foreground: #0c0c0f;
-  --muted: #18181b;
-  --muted-foreground: #a1a1aa;
+  --background: #0C0C0F;
+  --foreground: #FAFAFA;
+  --primary: #00D4AA;
+  --primary-foreground: #0C0C0F;
+  --muted: #18181B;
+  --muted-foreground: #A1A1AA;
   --card: #141417;
-  --card-foreground: #fafafa;
+  --card-foreground: #FAFAFA;
   --popover: #141417;
-  --popover-foreground: #fafafa;
-  --border: #27272a;
-  --input: #27272a;
-  --ring: #818cf8;
-  --accent: #22d3ee;
-  --accent-foreground: #0c0c0f;
+  --popover-foreground: #FAFAFA;
+  --border: #27272A;
+  --input: #27272A;
+  --ring: #00D4AA;
+  --accent: #06E0FF;
+  --accent-foreground: #0C0C0F;
   --success: #10b981;
   --warning: #f59e0b;
   --error: #ef4444;
   --info: #3b82f6;
-  --sidebar: #0c0c0f;
-  --sidebar-foreground: #d4d4d8;
-  --sidebar-border: #1f1f23;
-  --sidebar-accent: #18181b;
-  --sidebar-accent-foreground: #fafafa;
+  --sidebar: #0C0C0F;
+  --sidebar-foreground: #D4D4D8;
+  --sidebar-border: #1F1F23;
+  --sidebar-accent: #18181B;
+  --sidebar-accent-foreground: #FAFAFA;
   --glass-bg: rgba(12, 12, 15, 0.7);
   --glass-border: rgba(255, 255, 255, 0.05);
 }

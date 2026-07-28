@@ -55,9 +55,13 @@ export default function LoginPage() {
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.1, duration: 0.4, ease: [0.34, 1.56, 0.64, 1] }}
-            className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary shadow-lg shadow-primary/25"
+            className="mx-auto mb-4 flex h-12 w-12 items-center justify-center"
           >
-            <span className="text-lg font-bold text-primary-foreground">{brand.shortName}</span>
+            <svg viewBox="0 0 32 32" fill="none" className="h-10 w-10">
+              <path d="M16 1L2 13L8 21L16 11L24 21L30 13L16 1Z" fill="#00D4AA"/>
+              <path d="M8 21L2 13L8 31L16 21L16 11L8 21Z" fill="#06E0FF"/>
+              <path d="M24 21L30 13L24 31L16 21L16 11L24 21Z" fill="#00D4AA" opacity="0.7"/>
+            </svg>
           </motion.div>
           <h1 className="text-2xl font-bold tracking-tight">Welcome back</h1>
           <p className="mt-2 text-sm text-muted-foreground">

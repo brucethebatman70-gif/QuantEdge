@@ -29,10 +29,12 @@ export function Sidebar() {
       )}
     >
       <div className="flex h-14 items-center gap-2 px-3">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-          <span className="text-xs font-bold text-primary-foreground">
-            {brand.shortName}
-          </span>
+        <div className="flex h-8 w-8 items-center justify-center">
+          <svg viewBox="0 0 32 32" fill="none" className="h-8 w-8">
+            <path d="M16 1L2 13L8 21L16 11L24 21L30 13L16 1Z" fill="#00D4AA"/>
+            <path d="M8 21L2 13L8 31L16 21L16 11L8 21Z" fill="#06E0FF"/>
+            <path d="M24 21L30 13L24 31L16 21L16 11L24 21Z" fill="#00D4AA" opacity="0.7"/>
+          </svg>
         </div>
         <AnimatePresence>
           {!collapsed && (
