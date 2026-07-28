@@ -41,6 +41,14 @@ import {
   ExternalLink,
   Keyboard,
   Command,
+  Eye,
+  EyeOff,
+  KeyRound,
+  Lock,
+  Mail,
+  Check,
+  Sparkles,
+  ArrowRight,
   type LucideIcon,
 } from "lucide-react";
 
@@ -87,6 +95,14 @@ export const Icons: Record<string, LucideIcon> = {
   ExternalLink,
   Keyboard,
   Command,
+  Eye,
+  EyeOff,
+  KeyRound,
+  Lock,
+  Mail,
+  Check,
+  Sparkles,
+  ArrowRight,
 };
 
 export type IconName = keyof typeof Icons;
