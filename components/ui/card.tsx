@@ -1,69 +1,42 @@
-import { forwardRef, type HTMLAttributes } from "react";
+"use client";
+
+import type { HTMLAttributes } from "react";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/cn";
 
-const Card = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn(
-        "rounded-xl border bg-card text-card-foreground shadow-sm",
-        className
-      )}
-      {...props}
-    />
-  )
-);
-Card.displayName = "Card";
+function Card({ className, children, ...props }: HTMLAttributes<HTMLDivElement>) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20, scale: 0.98, filter: "blur(8px)" }}
+      animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={{ y: -4, scale: 1.015, transition: { duration: 0.25, ease: [0.16, 1, 0.3, 1] } }}
+      whileTap={{ scale: 0.985, transition: { duration: 0.05 } }}
+      className={cn("rounded-xl border bg-card text-card-foreground shadow-sm", className)}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
-const CardHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn("flex flex-col space-y-1.5 p-6", className)}
-      {...props}
-    />
-  )
-);
-CardHeader.displayName = "CardHeader";
+function CardHeader({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn("flex flex-col space-y-1.5 p-6", className)} {...props} />;
+}
 
-const CardTitle = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLHeadingElement>>(
-  ({ className, ...props }, ref) => (
-    <h3
-      ref={ref}
-      className={cn("text-lg font-semibold leading-none tracking-tight", className)}
-      {...props}
-    />
-  )
-);
-CardTitle.displayName = "CardTitle";
+function CardTitle({ className, ...props }: HTMLAttributes<HTMLHeadingElement>) {
+  return <h3 className={cn("text-lg font-semibold leading-none tracking-tight", className)} {...props} />;
+}
 
-const CardDescription = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLParagraphElement>>(
-  ({ className, ...props }, ref) => (
-    <p
-      ref={ref}
-      className={cn("text-sm text-muted-foreground", className)}
-      {...props}
-    />
-  )
-);
-CardDescription.displayName = "CardDescription";
+function CardDescription({ className, ...props }: HTMLAttributes<HTMLParagraphElement>) {
+  return <p className={cn("text-sm text-muted-foreground", className)} {...props} />;
+}
 
-const CardContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => (
-    <div ref={ref} className={cn("p-6 pt-0", className)} {...props} />
-  )
-);
-CardContent.displayName = "CardContent";
+function CardContent({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn("p-6 pt-0", className)} {...props} />;
+}
 
-const CardFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn("flex items-center p-6 pt-0", className)}
-      {...props}
-    />
-  )
-);
-CardFooter.displayName = "CardFooter";
+function CardFooter({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn("flex items-center p-6 pt-0", className)} {...props} />;
+}
 
 export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent };
