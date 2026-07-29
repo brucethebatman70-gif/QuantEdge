@@ -115,6 +115,15 @@ import {
   Repeat,
   LineChart,
   Wrench,
+  Trophy,
+  Award,
+  Medal,
+  Flame,
+  GraduationCap,
+  Gavel,
+  Crown,
+  PartyPopper,
+  Copy,
   type LucideIcon,
 } from "lucide-react";
 
@@ -235,6 +244,15 @@ export const Icons: Record<string, LucideIcon> = {
   LineChart,
   Wrench,
   Edit,
+  Trophy,
+  Award,
+  Medal,
+  Flame,
+  GraduationCap,
+  Gavel,
+  Crown,
+  PartyPopper,
+  Copy,
 };
 
 export type IconName = keyof typeof Icons;

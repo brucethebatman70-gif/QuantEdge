@@ -60,7 +60,7 @@ my-app/
 │       ├── coach/            # AI chat + insight cards
 │       ├── playbooks/        # Documented trading strategies
 │       ├── reports/          # Report generation
-│       ├── goals/            # Goal tracking with progress bars
+│       ├── goals/            # Goals & Performance Center (goals, habits, achievements, AI coach, discipline)
 │       └── settings/         # App settings
 └── public/
     └── images/               # Logo assets
@@ -124,8 +124,21 @@ npm run lint
 | `/coach` | AI Trading Coach |
 | `/playbooks` | Strategy Playbooks |
 | `/reports` | Reports |
-| `/goals` | Goals & Tracking |
+| `/goals` | Goals & Performance Center |
 | `/settings` | Settings |
+
+## Goals & Performance Center
+
+| Module | Description |
+|--------|-------------|
+| **Goal Tracking** | 20 goals across 7 categories (profit, consistency, risk, psychology, education, habit, strategy) and 6 types (daily → yearly + custom) with milestones, tags, and habit links |
+| **Habit Tracker** | 8 trading habits with 30-day boolean grid, toggle buttons, streak counters, and category grouping |
+| **Achievements** | 7 achievements with 4 rarity tiers (common → legendary), progress bars, unlock dates |
+| **Discipline Dashboard** | 4 live metrics (rule compliance, risk discipline, journal completion, review completion) with color-coded progress bars and overall score |
+| **AI Coach** | 7 insight types (weekly/monthly review, habit analysis, weakness, strength, suggestion, motivation) with score bars and expandable descriptions |
+| **KPIs** | 9 performance KPIs with animated progress bars and color-coded thresholds |
+| **Create Goal** | Tabbed dialog with 4 templates, type/category pickers, title, description, target, deadline |
+| **Smart Filtering** | Status filters (All/Active/Completed/Missed) + category chips + search |
 
 ## Design Features
 
