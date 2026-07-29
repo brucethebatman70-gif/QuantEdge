@@ -14,9 +14,14 @@ import { IntegrationsShowcase } from "@/components/landing/integrations-showcase
 import { EcosystemSection } from "@/components/landing/ecosystem-section";
 import { TransformationSection } from "@/components/landing/transformation-section";
 import { SuccessStories } from "@/components/landing/success-stories";
+import { CommunitySection } from "@/components/landing/community-section";
 import { TrustSection } from "@/components/landing/trust-section";
 import { PricingSection } from "@/components/landing/pricing-section";
+import { VisionSection } from "@/components/landing/vision-section";
 import { FinalCTASection } from "@/components/landing/final-cta-section";
+import { EnterpriseSection } from "@/components/landing/enterprise-section";
+import { CommunityHubSection } from "@/components/landing/community-hub-section";
+import { FooterSection } from "@/components/landing/footer-section";
 import { AmbientBackground } from "@/components/ui/ambient-background";
 
 export default function LandingPage() {
@@ -40,9 +45,14 @@ export default function LandingPage() {
       <AmbientBackground variant="analytics" className="top-1/3 h-1/2 opacity-30" />
       <TransformationSection />
       <SuccessStories />
+      <CommunitySection />
       <TrustSection />
       <PricingSection />
+      <VisionSection />
       <FinalCTASection />
+      <EnterpriseSection />
+      <CommunityHubSection />
+      <FooterSection />
     </main>
   );
 }
