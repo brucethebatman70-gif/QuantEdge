@@ -65,7 +65,8 @@ export async function POST(req: Request) {
         createdAt: typeof user.createdAt === "string" ? user.createdAt : user.createdAt.toISOString(),
       },
     });
-  } catch {
-    return NextResponse.json({ error: "Login failed" }, { status: 500 });
+  } catch (e) {
+    console.error("Login error:", e);
+    return NextResponse.json({ error: "Login failed", detail: e instanceof Error ? e.message : String(e) }, { status: 500 });
   }
 }
