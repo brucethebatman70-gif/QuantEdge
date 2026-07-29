@@ -34,7 +34,8 @@ export async function POST(req: Request) {
         try {
           user = await ensureDemoUser();
         } catch {
-          user = { id: "user_1", email: DEMO_EMAIL, firstName: "Demo", lastName: "User", emailVerified: true, createdAt: new Date().toISOString() };
+          const fallbackPassword = await bcrypt.hash(DEMO_PASSWORD, 12);
+          user = { id: "user_1", email: DEMO_EMAIL, firstName: "Demo", lastName: "User", password: fallbackPassword, emailVerified: true, createdAt: new Date().toISOString() };
         }
       } else {
         return NextResponse.json({ error: "Invalid email or password" }, { status: 401 });
