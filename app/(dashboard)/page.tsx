@@ -7,11 +7,17 @@ import { Progress } from "@/components/ui/progress";
 import { Icons } from "@/lib/icons";
 import { formatCurrency, formatPercent } from "@/lib/utils";
 import { mockStats, mockTrades, mockGoals } from "@/lib/mock-data";
+import { useCountUp } from "@/lib/hooks/use-count-up";
 import { AnimatedCounter } from "@/components/motion/animated-counter";
 import { Stagger, StaggerItem } from "@/components/motion/stagger";
 import { AnimatedRow } from "@/components/motion/animated-row";
 import { ScrollReveal } from "@/components/motion/scroll-reveal";
-import { easings, stagger as staggerConfig } from "@/lib/motion";
+import { easings } from "@/lib/motion";
+
+function WinRateText({ value }: { value: number }) {
+  const count = useCountUp({ end: value, duration: 1, delay: 0.5 });
+  return <tspan>{Math.round(count)}%</tspan>;
+}
 
 export default function DashboardPage() {
   const stats = [
@@ -192,9 +198,7 @@ export default function DashboardPage() {
                             animate={{ opacity: 1, transition: { duration: 0.5, delay: 0.6 } }}
                           />
                           <text x={cx} y={cy - 8} textAnchor="middle" className="fill-foreground text-2xl font-bold">
-                            <tspan>
-                              <AnimatedCounter end={winRate} duration={1} delay={0.5} />
-                            </tspan>%
+                            <WinRateText value={winRate} />
                           </text>
                           <text x={cx} y={cy + 14} textAnchor="middle" className="fill-muted-foreground text-xs">Win Rate</text>
                         </>
@@ -224,10 +228,11 @@ export default function DashboardPage() {
                           <g key={m.month}>
                             <motion.rect
                               x={i * (barW + gap) + 10}
-                              initial={{ scaleY: 0, y: h }}
-                              animate={{ scaleY: 1, y: 0, transition: { duration: 0.6, ease: easings.enter, delay: 0.2 + i * 0.08 } }}
-                              style={{ originY: h / 2 }}
-                              width={barW} height={Math.max(barH, 3)} rx="4"
+                              y={m.pnl >= 0 ? h - barH : h}
+                              width={barW}
+                              initial={{ height: 0 }}
+                              animate={{ height: Math.max(barH, 3), transition: { duration: 0.6, ease: easings.enter, delay: 0.2 + i * 0.08 } }}
+                              rx="4"
                               fill={m.pnl >= 0 ? "var(--success)" : "var(--error)"}
                             />
                             <text x={i * (barW + gap) + barW / 2 + 10} y={h + 14}
