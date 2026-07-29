@@ -19,6 +19,7 @@ export function Sidebar() {
 
   return (
     <aside
+      data-tour="sidebar"
       className={cn(
         "glass-sidebar fixed left-3 top-3 z-30 flex h-[calc(100vh-24px)] flex-col rounded-2xl",
         collapsed ? "w-[56px]" : "w-[220px]"
@@ -112,6 +113,7 @@ export function Sidebar() {
               <Link
                 key={item.href}
                 href={item.href}
+                data-tour={item.href === "/" ? "dashboard" : item.href === "/copilot" ? "ai-copilot" : item.href === "/reports" ? "reports" : item.href === "/settings" ? "settings" : undefined}
                 className="group relative flex h-9 items-center gap-3 rounded-xl px-3 text-sm font-medium"
               >
                 {isActive && (
