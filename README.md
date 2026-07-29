@@ -61,7 +61,7 @@ my-app/
 │       ├── playbooks/        # Documented trading strategies
 │       ├── reports/          # Reports Center (builder, schedule, export, AI summary, history)
 │       ├── goals/            # Goals & Performance Center (goals, habits, achievements, AI coach, discipline)
-│       └── settings/         # App settings
+│       └── settings/         # Settings Center (profile, workspace, appearance, security, billing, 13 sections)
 └── public/
     └── images/               # Logo assets
 ```
@@ -126,6 +126,26 @@ npm run lint
 | `/reports` | Reports |
 | `/goals` | Goals & Performance Center |
 | `/settings` | Settings |
+
+## Settings Center
+
+| Module | Description |
+|--------|-------------|
+| **Profile** | Avatar, display name, email, phone, country, timezone, language, trading experience, bio |
+| **Workspace** | Default dashboard, account, broker, timeframe, currency, measurement units |
+| **Appearance** | Dark/Light/System theme, 6 accent colors, sidebar style, glass intensity, compact mode, border radius, typography scale, animation level |
+| **Notifications** | 3 delivery channels (desktop, email, mobile), 3 alert types (trade, goal, AI), 2 report subscriptions |
+| **Broker Connections** | MT4/MT5/TradingView/cTrader connections with status badges, reconnect/disconnect actions |
+| **AI Preferences** | Model picker (GPT-4, Claude 3, GPT-3.5, Gemini), response/coaching/risk styles, memory, voice mode, smart suggestions |
+| **Security** | Password, 2FA toggle, active sessions list, recovery codes |
+| **Privacy** | Analytics sharing, data export, danger zone with account deletion |
+| **API Keys** | OpenAI/Anthropic/Google AI keys with usage bars and status |
+| **Integrations** | Discord, Slack, Telegram, Google Drive with connect/disconnect toggles |
+| **Billing** | Current plan card, usage bar, invoices/payment buttons |
+| **Keyboard Shortcuts** | Grouped shortcut list (global, trading, journal, replay, analytics, navigation) |
+| **About** | App info, version, legal links |
+| **Help Panel** | Collapsible right sidebar with quick tips, documentation, video tutorials, support, community links |
+| **Data layer** | `lib/settings/` — types, vanilla Proxy store with 25+ settings across 13 sections |
 
 ## Reports Center
 

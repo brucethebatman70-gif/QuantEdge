@@ -126,8 +126,15 @@ import {
   Crown,
   PartyPopper,
   Copy,
+  Share2,
   Table,
   Printer,
+  Info,
+  Globe,
+  CreditCard,
+  Puzzle,
+  Users,
+  Power,
   type LucideIcon,
 } from "lucide-react";
 
@@ -259,8 +266,15 @@ export const Icons: Record<string, LucideIcon> = {
   Crown,
   PartyPopper,
   Copy,
+  Share2,
   Table,
   Printer,
+  Info,
+  Globe,
+  CreditCard,
+  Puzzle,
+  Users,
+  Power,
 };
 
 export type IconName = keyof typeof Icons;
