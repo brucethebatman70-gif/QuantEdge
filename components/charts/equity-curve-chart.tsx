@@ -100,6 +100,7 @@ export function EquityCurveChart({
 
         {showBalance && (
           <Line
+            yAxisId="equity"
             type="monotone"
             dataKey="balance"
             stroke="rgba(255,255,255,0.15)"
@@ -113,6 +114,7 @@ export function EquityCurveChart({
 
         {showDrawdown && (
           <Area
+            yAxisId="equity"
             type="monotone"
             dataKey="drawdown"
             fill={`url(#${gradientId}-equity-down)`}
@@ -136,6 +138,7 @@ export function EquityCurveChart({
         </defs>
 
         <Line
+          yAxisId="equity"
           type="monotone"
           dataKey="equity"
           stroke="#00D4AA"
@@ -149,6 +152,7 @@ export function EquityCurveChart({
 
         {animated && (
           <Area
+            yAxisId="equity"
             type="monotone"
             dataKey="equity"
             fill={`url(#${areaGradient})`}
