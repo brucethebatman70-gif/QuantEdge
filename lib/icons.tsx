@@ -5,6 +5,7 @@ import {
   PlayCircle,
   FlaskConical,
   Bot,
+  Edit,
   FileText,
   PieChart,
   Target,
@@ -233,6 +234,7 @@ export const Icons: Record<string, LucideIcon> = {
   Repeat,
   LineChart,
   Wrench,
+  Edit,
 };
 
 export type IconName = keyof typeof Icons;
