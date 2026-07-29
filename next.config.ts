@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
   },
   experimental: {
+    authInterrupts: true,
     optimizeCss: false,
     optimizePackageImports: [
       "lucide-react",

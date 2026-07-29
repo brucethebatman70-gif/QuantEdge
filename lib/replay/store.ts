@@ -21,6 +21,10 @@ interface ReplayState {
   setFilterDirection: (d: string | null) => void;
   filterResult: string | null;
   setFilterResult: (r: string | null) => void;
+  livePrice: { price: number; bid: number; ask: number; change: number; symbol: string } | null;
+  isLiveConnected: boolean;
+  setLivePrice: (p: { price: number; bid: number; ask: number; change: number; symbol: string } | null) => void;
+  setLiveConnected: (c: boolean) => void;
 }
 
 let state: {
@@ -29,8 +33,12 @@ let state: {
   searchQuery: string;
   filterDirection: string | null;
   filterResult: string | null;
+  livePrice: { price: number; bid: number; ask: number; change: number; symbol: string } | null;
+  isLiveConnected: boolean;
 } = {
   selectedTradeId: null,
+  livePrice: null,
+  isLiveConnected: false,
   playback: {
     isPlaying: false,
     speed: 1,
@@ -119,6 +127,16 @@ export function useReplayStore(): ReplayState {
     notify();
   }, []);
 
+  const setLivePrice = useCallback((p: { price: number; bid: number; ask: number; change: number; symbol: string } | null) => {
+    state = { ...state, livePrice: p };
+    notify();
+  }, []);
+
+  const setLiveConnected = useCallback((c: boolean) => {
+    state = { ...state, isLiveConnected: c };
+    notify();
+  }, []);
+
   return {
     selectedTradeId: state.selectedTradeId,
     setSelectedTradeId,
@@ -137,5 +155,9 @@ export function useReplayStore(): ReplayState {
     setFilterDirection,
     filterResult: state.filterResult,
     setFilterResult,
+    livePrice: state.livePrice,
+    isLiveConnected: state.isLiveConnected,
+    setLivePrice,
+    setLiveConnected,
   };
 }

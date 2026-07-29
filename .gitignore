@@ -55,3 +55,15 @@ Desktop.ini
 # logs
 *.log
 
+
+/lib/generated/prisma
+
+# database
+*.db
+*.db-journal
+
+# agent/tool configs
+.agents/
+.claude/
+.windsurf/
+skills-lock.json

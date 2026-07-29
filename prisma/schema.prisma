@@ -1,0 +1,90 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  firstName     String
+  lastName      String
+  password      String
+  emailVerified Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  journalEntries  JournalEntry[]
+  goals           Goal[]
+  playbooks       Playbook[]
+}
+
+model JournalEntry {
+  id               String   @id @default(cuid())
+  userId           String
+  date             DateTime
+  title            String
+  content          String
+  status           String   @default("published")
+  tags             String   @default("[]")
+  session          String   @default("morning")
+  marketConditions String   @default("")
+  emotion          String?
+  energyLevel      Int      @default(5)
+  confidence       Int      @default(5)
+  discipline       Int      @default(5)
+  psychologyNotes  String   @default("")
+  triggers         String   @default("[]")
+  planFollowed     Boolean  @default(true)
+  entryTiming      Int      @default(3)
+  exitTiming       Int      @default(3)
+  riskManagement   Int      @default(3)
+  mistake          String?
+  mistakeNote      String   @default("")
+  lessonLearned    String   @default("")
+  aiSummary        String?
+  aiScore          Int?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Goal {
+  id         String   @id @default(cuid())
+  userId     String
+  title      String
+  target     Float
+  current    Float
+  unit       String   @default("trades")
+  deadline   DateTime?
+  category   String   @default("performance")
+  status     String   @default("active")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Playbook {
+  id          String   @id @default(cuid())
+  userId      String
+  name        String
+  description String
+  setup       String
+  direction   String   @default("long")
+  entryRules  String   @default("[]")
+  exitRules   String   @default("[]")
+  tags        String   @default("[]")
+  winRate     Float    @default(0)
+  totalTrades Int      @default(0)
+  pnl         Float    @default(0)
+  status      String   @default("active")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+}

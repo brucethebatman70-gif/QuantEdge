@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#0C0C0F"/>
+  <path d="M96 40L28 92L48 128L96 76L144 128L164 92L96 40Z" fill="#00D4AA"/>
+  <path d="M48 128L28 92L48 176L96 128L96 76L48 128Z" fill="#06E0FF"/>
+  <path d="M144 128L164 92L144 176L96 128L96 76L144 128Z" fill="#00D4AA" opacity="0.7"/>
+  <text x="600" y="300" text-anchor="middle" fill="#FAFAFA" font-family="Inter, sans-serif" font-size="64" font-weight="700">QuantEdge</text>
+  <text x="600" y="360" text-anchor="middle" fill="#A1A1AA" font-family="Inter, sans-serif" font-size="28">AI-Powered Trading Operating System</text>
+  <rect x="400" y="400" width="400" height="4" rx="2" fill="#00D4AA"/>
+  <text x="600" y="450" text-anchor="middle" fill="#71717A" font-family="Inter, sans-serif" font-size="18">Journal · Analytics · Replay · Backtesting · AI Coach</text>
+</svg>

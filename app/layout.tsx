@@ -23,13 +23,15 @@ export const metadata: Metadata = {
   },
   description: brand.seo.description,
   keywords: brand.seo.keywords,
-  openGraph: {
-    title: brand.seo.title,
-    description: brand.seo.description,
-    siteName: brand.name,
-    locale: brand.metrics.locale,
-    type: "website",
-  },
+  manifest: "/manifest.json",
+    openGraph: {
+      title: brand.seo.title,
+      description: brand.seo.description,
+      siteName: brand.name,
+      locale: brand.metrics.locale,
+      type: "website",
+      images: [{ url: "/images/og-image.svg", width: 1200, height: 630 }],
+    },
   twitter: {
     card: "summary_large_image",
     title: brand.seo.title,
@@ -44,6 +46,8 @@ export const viewport: Viewport = {
     { media: "(prefers-color-scheme: dark)", color: "#0c0c0f" },
   ],
 };
+
+export const dynamic = "force-static";
 
 export default function RootLayout({
   children,
