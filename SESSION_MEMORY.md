@@ -3,6 +3,32 @@
 ## Session Date
 July 29, 2026
 
+## Recent Sessions Summary
+
+### Session N — Intelligence Card System (latest)
+- **Goal**: Redesign every dashboard card into premium OS-style intelligence modules
+- **10 specialized cards**: ProfitCard, WinRateCard, RiskCard, DrawdownCard, TradesCard, EmotionCard, AICard, MarketCard, PortfolioCard, AchievementCard
+- **Every card contains**: Animated primary metric, trend badge with hover explanation, mini sparkline with gradient, status indicator with pulse, AI insight sentence (appears on hover), physical hover lift/glow/shadow
+- **Base shell**: `IntelligenceCard` with glass-card, glow variants, framer-motion whileHover/whileTap
+- **Sub-components**: `CardHeader` (status dot + title + hover actions), `TrendBadge`, `AiInsightLine`, `QuickActions`, `EmptyState` (5 SVG variants), `Shimmer` (skeleton loader)
+- **Dashboard layout**: Row 1 (4 KPI cards), Row 2 (equity curve span2 + AICard), Row 3 (TradesCard + PortfolioCard + MarketCard), Row 4 (EmotionCard + AchievementCard)
+- **Build**: 0 errors, 0 TypeScript errors
+
+### Session M — Premium Chart System
+- **New chart components**: `chart-theme.ts`, `ChartContainer` (glass wrapper), `ChartTooltipContent` (glass tooltip), `ChartGradients` (SVG defs), `EquityCurveChart`, `BarChart`, `DonutChart`, `Crosshair`, `InteractiveLegend`, `ChartBrush`, `Sparkline`
+- **New page**: `app/(dashboard)/charts/page.tsx` — Charts Hub with all chart types
+- **Refactored**: All 8 analytics components + dashboard page use new chart system
+
+### Session L — Glass Design System + Motion Redesign
+- **Motion system**: Centralized `lib/motion.ts` — premium cubic-bezier easings, 5 spring presets, 20+ variant factories
+- **Glass CSS**: 8-layer card construction (blur24, noise, gradient border, multi-shadow, ambient glow, inner highlight)
+- **Background**: 4-layer (radial gradients, noise texture, micro grid, ambient orbs)
+- **Components**: `AnimatedCard`, `GlassCard`, `AnimatedCounter`, `AnimatedRow`, `Stagger`, `ScrollReveal`, `Skeleton`, `PageTransition`, `PageWrapper`
+
+### Session K — Deployment & Goals/Reports/Settings Centers
+- **3 full centers**: Goals & Performance (14 files), Reports (11 files), Settings & Workspace (17 files)
+- **Deployment**: Public at https://quant-edge-kappa.vercel.app, demo login fallback, auth proxy removed
+
 ## Assistant
 opencode (deepseek-v4-flash-free)
 

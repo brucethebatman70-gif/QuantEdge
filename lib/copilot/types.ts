@@ -8,6 +8,8 @@ export interface CopilotMessage {
     actions?: string[];
     score?: number;
     type?: "analysis" | "review" | "insight" | "suggestion" | "warning" | "success" | "error";
+    confidence?: "low" | "medium" | "high" | "very-high";
+    reasoning?: string;
   };
 }
 
@@ -48,6 +50,65 @@ export interface AiInsightMetric {
   trend: "up" | "down" | "stable";
 }
 
+export interface AiHomeWidget {
+  id: string;
+  type: "summary" | "performance" | "confidence" | "risk" | "streak" | "market" | "actions" | "events";
+  title: string;
+  priority: number;
+}
+
+export interface AiProactiveAlert {
+  id: string;
+  type: "warning" | "tip" | "insight" | "celebration";
+  message: string;
+  timestamp: string;
+  read: boolean;
+  actionLabel?: string;
+}
+
+export interface AiMemoryProfile {
+  tradingStyle: string;
+  preferredAssets: string[];
+  riskPercent: number;
+  sessions: string[];
+  favoriteSetups: string[];
+  goals: { label: string; progress: number }[];
+  learningProgress: string[];
+  knownInfo: string[];
+}
+
+export interface TradeReviewResult {
+  summary: string;
+  strengths: string[];
+  weaknesses: string[];
+  riskAnalysis: string;
+  psychologyAnalysis: string;
+  executionScore: number;
+  disciplineScore: number;
+  overallGrade: string;
+  improvementPlan: string[];
+}
+
+export interface EmotionProfile {
+  dominant: string;
+  confidence: number;
+  discipline: number;
+  patience: number;
+  fear: number;
+  greed: number;
+  trend: "improving" | "stable" | "declining";
+  insights: string[];
+}
+
+export interface MarketIntel {
+  bias: "bullish" | "bearish" | "neutral";
+  probability: number;
+  keyLevels: { level: string; type: string }[];
+  newsImpact: string;
+  sessionAnalysis: string;
+  volatility: "low" | "medium" | "high";
+}
+
 export interface Folder {
   id: string;
   name: string;
@@ -55,6 +116,7 @@ export interface Folder {
 }
 
 export interface CopilotState {
+  view: "home" | "chat";
   conversations: CopilotConversation[];
   activeConversationId: string | null;
   isStreaming: boolean;
@@ -66,6 +128,9 @@ export interface CopilotState {
   templates: CopilotTemplate[];
   folders: Folder[];
   contextPanel: "insights" | "suggestions" | "templates" | null;
+  proactiveAlerts: AiProactiveAlert[];
+  memory: AiMemoryProfile;
+  activePanel: "chat" | "review" | "emotion" | "risk" | "market" | null;
 }
 
 export const AI_INSIGHT_ICONS: Record<string, React.ElementType | undefined> = {};

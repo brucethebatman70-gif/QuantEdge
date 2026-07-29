@@ -281,6 +281,56 @@ body {
   border-color: var(--border-hover);
 }
 
+.glass-card-hover:active {
+  transform: translateY(0px) scale(0.995);
+  transition-duration: 0.1s;
+}
+
+/* Glass card loading skeleton animation */
+.glass-skeleton {
+  position: relative;
+  overflow: hidden;
+  background: rgba(255,255,255,0.04);
+}
+
+.glass-skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255,255,255,0.04) 50%,
+    transparent 100%
+  );
+  animation: shimmer 1.5s ease-in-out infinite;
+  background-size: 200% 100%;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Micro-interaction: glow pulse for active status */
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Micro-interaction: scale bounce for trend badge */
+@keyframes trend-bounce {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+/* Micro-interaction: count-up shimmer */
+@keyframes count-flash {
+  0% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
 /* Glass card glow variants */
 .glass-glow-success::after {
   background: radial-gradient(ellipse 60% 40% at 50% 100%, rgba(16,185,129,0.08) 0%, transparent 70%);

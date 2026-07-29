@@ -4,11 +4,9 @@ import { useState, useEffect, useMemo } from "react";
 import type {
   CopilotConversation,
   CopilotMessage,
-  AiInsightMetric,
-  CopilotSuggestion,
-  CopilotTemplate,
   CopilotState,
-  Folder,
+  AiProactiveAlert,
+  AiMemoryProfile,
 } from "./types";
 import {
   mockConversations,
@@ -19,6 +17,7 @@ import {
 } from "./mock-data";
 
 interface CopilotActions {
+  setView: (view: "home" | "chat") => void;
   setActiveConversation: (id: string | null) => void;
   createConversation: (title?: string) => string;
   deleteConversation: (id: string) => void;
@@ -29,11 +28,25 @@ interface CopilotActions {
   setSelectedFolder: (folder: string | null) => void;
   setShowPinnedOnly: (pinned: boolean) => void;
   setContextPanel: (panel: CopilotState["contextPanel"]) => void;
+  setActivePanel: (panel: CopilotState["activePanel"]) => void;
+  markAlertRead: (id: string) => void;
 }
 
+const defaultMemory: AiMemoryProfile = {
+  tradingStyle: "swing",
+  preferredAssets: ["AAPL", "NVDA", "MSFT", "SPY"],
+  riskPercent: 2,
+  sessions: ["newyork", "london"],
+  favoriteSetups: ["Breakout", "Pullback"],
+  goals: [{ label: "Daily Trades", progress: 80 }, { label: "Win Rate 70%", progress: 68 }, { label: "Risk < 2%", progress: 90 }],
+  learningProgress: ["Risk management improved 18%", "Emotion control needs work"],
+  knownInfo: ["User prefers swing trading", "Avoids crypto", "Best session is NY morning"],
+};
+
 let state: CopilotState = {
+  view: "home",
   conversations: mockConversations,
-  activeConversationId: "conv_1",
+  activeConversationId: null,
   isStreaming: false,
   searchQuery: "",
   selectedFolder: null,
@@ -43,6 +56,13 @@ let state: CopilotState = {
   templates: mockTemplates,
   folders: mockFolders,
   contextPanel: "insights",
+  activePanel: null,
+  proactiveAlerts: [
+    { id: "alert_1", type: "warning", message: "Your position sizing has been inconsistent this week. 3 trades exceeded 2% risk.", timestamp: new Date().toISOString(), read: false, actionLabel: "Review trades" },
+    { id: "alert_2", type: "celebration", message: "Breakout strategy hit 72% win rate this month. Your best performing setup.", timestamp: new Date(Date.now() - 3600000).toISOString(), read: false, actionLabel: "View details" },
+    { id: "alert_3", type: "insight", message: "You perform 13% better during London session. Consider prioritizing these hours.", timestamp: new Date(Date.now() - 7200000).toISOString(), read: false, actionLabel: "Optimize schedule" },
+  ],
+  memory: defaultMemory,
 };
 
 const listeners = new Set<() => void>();
@@ -55,6 +75,7 @@ function generateId(): string {
 }
 
 const actions: CopilotActions = {
+  setView: (view) => setState({ view }),
   setActiveConversation: (id) => setState({ activeConversationId: id }),
   createConversation: (title) => {
     const id = `conv_${generateId()}`;
@@ -71,6 +92,7 @@ const actions: CopilotActions = {
     setState({
       conversations: [conv, ...state.conversations],
       activeConversationId: id,
+      view: "chat",
     });
     return id;
   },
@@ -101,6 +123,14 @@ const actions: CopilotActions = {
   setSelectedFolder: (folder) => setState({ selectedFolder: folder }),
   setShowPinnedOnly: (pinned) => setState({ showPinnedOnly: pinned }),
   setContextPanel: (panel) => setState({ contextPanel: panel }),
+  setActivePanel: (panel) => setState({ activePanel: panel }),
+  markAlertRead: (id) => {
+    setState({
+      proactiveAlerts: state.proactiveAlerts.map((a) =>
+        a.id === id ? { ...a, read: true } : a
+      ),
+    });
+  },
 };
 
 export type CopilotStore = CopilotState & CopilotActions;

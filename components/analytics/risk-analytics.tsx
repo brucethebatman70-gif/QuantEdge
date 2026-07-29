@@ -1,102 +1,58 @@
 "use client";
 
-import {
-  ResponsiveContainer,
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Cell,
-  PieChart,
-  Pie,
-  Legend,
-} from "recharts";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/cn";
 import { formatCurrency } from "@/lib/utils";
 import { mockAnalyticsData } from "@/lib/analytics/mock-analytics";
+import { ChartContainer } from "@/components/charts/chart-container";
+import { DonutChart } from "@/components/charts/donut-chart";
+import { BarChart } from "@/components/charts/bar-chart";
+
+const pieColors = ["#00D4AA", "#06E0FF", "#8b5cf6", "#f59e0b", "#ef4444"];
 
 export function RiskAnalytics() {
-  const pieColors = ["#6366f1", "#06b6d4", "#10b981", "#f59e0b", "#ef4444"];
-
   return (
     <div className="grid gap-4 lg:grid-cols-2">
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-sm font-semibold">Risk Distribution</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="h-[240px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie
-                  data={mockAnalyticsData.riskDistribution}
-                  dataKey="count"
-                  nameKey="bucket"
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={55}
-                  outerRadius={85}
-                  paddingAngle={3}
-                >
-                  {mockAnalyticsData.riskDistribution.map((_, i) => (
-                    <Cell key={i} fill={pieColors[i % pieColors.length]} />
-                  ))}
-                </Pie>
-                <Tooltip
-                  contentStyle={{ background: "hsl(var(--popover))", border: "1px solid hsl(var(--border))", borderRadius: "8px", fontSize: "12px" }}
-                  formatter={(value: number, name: string) => [value, name]}
-                />
-                <Legend wrapperStyle={{ fontSize: "10px" }} />
-              </PieChart>
-            </ResponsiveContainer>
-          </div>
-          <div className="mt-2 space-y-1">
-            {mockAnalyticsData.riskDistribution.map((r, i) => (
-              <div key={r.bucket} className="flex items-center justify-between text-xs">
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full" style={{ backgroundColor: pieColors[i] }} />
-                  <span>{r.bucket}</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <span className="tabular-nums text-muted-foreground">{r.count} trades</span>
-                  <span className={cn("tabular-nums font-medium", r.pnl >= 0 ? "text-success" : "text-error")}>
-                    {formatCurrency(r.pnl)}
-                  </span>
-                </div>
+      <ChartContainer title="Risk Distribution" subtitle="Trade count by risk bucket" glow="warning" height={380}>
+        <DonutChart
+          data={mockAnalyticsData.riskDistribution.map((r, i) => ({
+            label: r.bucket,
+            value: r.count,
+            color: pieColors[i],
+          }))}
+          height={220}
+          innerRadius={55}
+          outerRadius={85}
+          centerValue={`${mockAnalyticsData.riskDistribution.reduce((s, r) => s + r.count, 0)}`}
+          centerLabel="Trades"
+        />
+        <div className="mt-2 space-y-1 px-3">
+          {mockAnalyticsData.riskDistribution.map((r, i) => (
+            <div key={r.bucket} className="flex items-center justify-between text-xs">
+              <div className="flex items-center gap-2">
+                <div className="h-2 w-2 rounded-full" style={{ backgroundColor: pieColors[i] }} />
+                <span>{r.bucket}</span>
               </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+              <div className="flex items-center gap-3">
+                <span className="tabular-nums text-muted-foreground">{r.count} trades</span>
+                <span className={cn("tabular-nums font-medium", r.pnl >= 0 ? "text-success" : "text-error")}>
+                  {formatCurrency(r.pnl)}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </ChartContainer>
 
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-sm font-semibold">Position Size Distribution</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="h-[240px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={mockAnalyticsData.positionSizeDistribution} margin={{ top: 5, right: 10, left: 10, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                <XAxis dataKey="bucket" tick={{ fontSize: 9, fill: "hsl(var(--muted-foreground))" }} />
-                <YAxis tick={{ fontSize: 10, fill: "hsl(var(--muted-foreground))" }} />
-                <Tooltip
-                  contentStyle={{ background: "hsl(var(--popover))", border: "1px solid hsl(var(--border))", borderRadius: "8px", fontSize: "12px" }}
-                  formatter={(value: number) => [value, "Trades"]}
-                />
-                <Bar dataKey="count" radius={[4, 4, 0, 0]} maxBarSize={40}>
-                  {mockAnalyticsData.positionSizeDistribution.map((_, i) => (
-                    <Cell key={i} fill={pieColors[i]} />
-                  ))}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-        </CardContent>
-      </Card>
+      <ChartContainer title="Position Size Distribution" subtitle="Trade count by position size" height={380}>
+        <BarChart
+          data={mockAnalyticsData.positionSizeDistribution.map((d) => ({
+            label: d.bucket,
+            value: d.count,
+          }))}
+          height={300}
+          maxBarSize={40}
+        />
+      </ChartContainer>
     </div>
   );
 }

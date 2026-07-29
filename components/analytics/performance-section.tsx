@@ -1,25 +1,13 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import {
-  ResponsiveContainer,
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  LineChart,
-  Line,
-} from "recharts";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/cn";
-import { formatCurrency, formatPercent } from "@/lib/utils";
+import { formatCurrency } from "@/lib/utils";
 import { mockAnalyticsData } from "@/lib/analytics/mock-analytics";
 import type { PerformancePeriod } from "@/lib/analytics/types";
+import { ChartContainer } from "@/components/charts/chart-container";
+import { BarChart } from "@/components/charts/bar-chart";
 
 function PerformanceTable({ data }: { data: PerformancePeriod[] }) {
   return (
@@ -75,42 +63,29 @@ export function PerformanceSection() {
 
   return (
     <Tabs value={tab} onValueChange={setTab} className="w-full">
-      <Card>
-        <CardHeader className="pb-2">
-          <div className="flex items-center justify-between">
-            <CardTitle className="text-sm font-semibold">Performance Analytics</CardTitle>
-            <TabsList className="h-8">
-              {Object.keys(tabData).map((t) => (
-                <TabsTrigger key={t} value={t} className="text-[11px] capitalize px-2.5">
-                  {t}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-          </div>
-        </CardHeader>
-        <CardContent>
-          <div className="h-[220px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={chartData} margin={{ top: 5, right: 10, left: 10, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                <XAxis dataKey="period" tick={{ fontSize: 10, fill: "hsl(var(--muted-foreground))" }} tickLine={false} />
-                <YAxis tick={{ fontSize: 10, fill: "hsl(var(--muted-foreground))" }} tickLine={false} axisLine={false} />
-                <Tooltip
-                  contentStyle={{ background: "hsl(var(--popover))", border: "1px solid hsl(var(--border))", borderRadius: "8px", fontSize: "12px" }}
-                  formatter={(value: number, name: string) => [
-                    name === "P&L" ? formatCurrency(value) : `${value}%`,
-                    name,
-                  ]}
-                />
-                <Legend wrapperStyle={{ fontSize: "11px" }} />
-                <Bar dataKey="pnl" name="P&L" fill="#6366f1" radius={[4, 4, 0, 0]} maxBarSize={40} />
-                <Line type="monotone" dataKey="winRate" name="Win Rate" stroke="#10b981" strokeWidth={2} dot={false} />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-          <PerformanceTable data={chartData} />
-        </CardContent>
-      </Card>
+      <ChartContainer
+        title="Performance Analytics"
+        subtitle="P&L and win rate across periods"
+        glow="analytics"
+        height={420}
+        rightAction={
+          <TabsList className="h-7">
+            {Object.keys(tabData).map((t) => (
+              <TabsTrigger key={t} value={t} className="text-[10px] capitalize px-2">
+                {t}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+        }
+      >
+        <BarChart
+          data={chartData.map((d) => ({ label: d.period, value: d.pnl }))}
+          height={220}
+          maxBarSize={40}
+          valuePrefix="$"
+        />
+        <PerformanceTable data={chartData} />
+      </ChartContainer>
     </Tabs>
   );
 }
