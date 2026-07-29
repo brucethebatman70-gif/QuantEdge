@@ -23,7 +23,7 @@ function VerifyEmailContent() {
       try {
         await verifyEmail(token);
         setStatus("success");
-        setTimeout(() => router.push("/"), 2000);
+        setTimeout(() => router.push("/dashboard"), 2000);
       } catch {
         setStatus("error");
       }

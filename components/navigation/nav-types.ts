@@ -55,7 +55,7 @@ export const NAV_SECTIONS: NavSection[] = [
 ];
 
 export const NAV_ITEMS: NavItem[] = [
-  { id: "dashboard", label: "Dashboard", href: "/", icon: "LayoutDashboard", shortcut: "G D", section: { id: "workspace", label: "Workspace" } },
+  { id: "dashboard", label: "Dashboard", href: "/dashboard", icon: "LayoutDashboard", shortcut: "G D", section: { id: "workspace", label: "Workspace" } },
   { id: "journal", label: "Journal", href: "/journal", icon: "BookOpen", shortcut: "G J", section: { id: "trading", label: "Trading" } },
   { id: "import", label: "Import", href: "/import", icon: "Upload", shortcut: "G I", section: { id: "trading", label: "Trading" } },
   { id: "playbooks", label: "Playbooks", href: "/playbooks", icon: "FileText", shortcut: "G P", section: { id: "trading", label: "Trading" } },

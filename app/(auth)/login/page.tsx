@@ -38,7 +38,7 @@ export default function LoginPage() {
     setError(null);
     try {
       await login(data.email, data.password, data.rememberMe);
-      router.push("/");
+      router.push("/dashboard");
     } catch {
       setError("Invalid email or password. Please try again.");
     }

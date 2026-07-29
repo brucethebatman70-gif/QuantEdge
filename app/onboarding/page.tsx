@@ -19,7 +19,7 @@ export default function OnboardingPage() {
   const [step, setStep] = useState(1);
 
   const next = () => { if (step < totalSteps) setStep(s => s + 1); };
-  const back = () => { if (step > 1) setStep(s => s - 1); else router.push("/"); };
+  const back = () => { if (step > 1) setStep(s => s - 1); else router.push("/dashboard"); };
 
   const selectableGrid = <T extends string>(items: T[], selected: T | T[] | undefined, onSelect: (v: T) => void, multi = false) => (
     <div className="grid grid-cols-2 gap-3" role={multi ? "group" : "radiogroup"}>
@@ -171,7 +171,7 @@ export default function OnboardingPage() {
     }
   };
 
-  const handleFinish = () => { completeOnboarding(); router.push("/"); };
+  const handleFinish = () => { completeOnboarding(); router.push("/dashboard"); };
 
   return (
     <div className="flex min-h-screen flex-col">
