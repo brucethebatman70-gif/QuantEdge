@@ -102,6 +102,18 @@ import {
   Sliders,
   StickyNote,
   Sparkle,
+  Layers,
+  Droplets,
+  LogIn,
+  ListChecks,
+  Lightbulb,
+  History,
+  GitCompare,
+  AlertCircle,
+  RotateCcw,
+  Repeat,
+  LineChart,
+  Wrench,
   type LucideIcon,
 } from "lucide-react";
 
@@ -209,6 +221,18 @@ export const Icons: Record<string, LucideIcon> = {
   Sliders,
   StickyNote,
   Sparkle,
+  Layers,
+  Droplets,
+  LogIn,
+  ListChecks,
+  Lightbulb,
+  History,
+  GitCompare,
+  AlertCircle,
+  RotateCcw,
+  Repeat,
+  LineChart,
+  Wrench,
 };
 
 export type IconName = keyof typeof Icons;
