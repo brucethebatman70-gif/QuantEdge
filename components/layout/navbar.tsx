@@ -24,39 +24,40 @@ export function Navbar({ title }: NavbarProps) {
   const mounted = useMounted();
 
   return (
-    <header className="sticky top-0 z-20 flex h-14 items-center gap-4 border-b bg-background/80 backdrop-blur-lg px-6">
+    <header className="glass-navbar sticky top-3 z-20 mx-3 flex h-12 items-center gap-4 rounded-xl px-4">
       <div className="flex-1">
-        <h1 className="text-sm font-semibold">
+        <h1 className="text-sm font-semibold opacity-80">
           {title || "Dashboard"}
         </h1>
       </div>
 
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1.5">
         <Button
           variant="ghost"
-          size="icon-sm"
+          size="icon-xs"
+          className="opacity-60 hover:opacity-100"
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
         >
           {mounted && (theme === "dark" ? (
-            <Icons.Sun className="h-4 w-4" />
+            <Icons.Sun className="h-3.5 w-3.5" />
           ) : (
-            <Icons.Moon className="h-4 w-4" />
+            <Icons.Moon className="h-3.5 w-3.5" />
           ))}
         </Button>
 
-        <Button variant="ghost" size="icon-sm">
-          <Icons.Bell className="h-4 w-4" />
+        <Button variant="ghost" size="icon-xs" className="opacity-60 hover:opacity-100">
+          <Icons.Bell className="h-3.5 w-3.5" />
         </Button>
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon" className="rounded-full">
-              <Avatar className="h-7 w-7">
-                <AvatarFallback className="text-[10px]">AD</AvatarFallback>
+            <Button variant="ghost" size="icon-sm" className="rounded-full opacity-60 hover:opacity-100 ml-1">
+              <Avatar className="h-6 w-6">
+                <AvatarFallback className="text-[9px]">AD</AvatarFallback>
               </Avatar>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-56">
+          <DropdownMenuContent align="end" className="w-56 glass-popover">
             <DropdownMenuLabel>
               <div className="flex flex-col">
                 <span className="text-sm font-medium">Demo User</span>

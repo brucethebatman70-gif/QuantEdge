@@ -60,7 +60,13 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${inter.variable} ${jetbrainsMono.variable}`}
     >
-      <body className="min-h-screen bg-background font-sans antialiased">
+      <body className="min-h-screen bg-background font-sans antialiased relative">
+        <div className="background-layers" aria-hidden="true">
+          <div className="background-gradient" />
+          <div className="background-noise" />
+          <div className="background-grid" />
+          <div className="background-ambient" />
+        </div>
         <AppProvider>{children}</AppProvider>
       </body>
     </html>

@@ -16,11 +16,11 @@ export function DashboardLayout({ children, title }: DashboardLayoutProps) {
   const pathname = usePathname();
 
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex min-h-screen">
       <Sidebar />
-      <div className="flex flex-1 flex-col pl-[240px]">
+      <div className="flex flex-1 flex-col pl-[244px] pr-3 pb-3 pt-0">
         <Navbar title={title} />
-        <main className="flex-1 overflow-auto p-6">
+        <main className="flex-1 overflow-auto">
           <AnimatePresence mode="wait">
             <motion.div
               key={pathname}
@@ -28,6 +28,7 @@ export function DashboardLayout({ children, title }: DashboardLayoutProps) {
               initial="initial"
               animate="animate"
               exit="exit"
+              className="p-5 pt-4"
             >
               {children}
             </motion.div>
