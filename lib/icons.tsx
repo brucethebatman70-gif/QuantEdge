@@ -135,6 +135,11 @@ import {
   Puzzle,
   Users,
   Power,
+  Link2,
+  WifiOff,
+  CheckSquare,
+  Inbox,
+  Beaker,
   type LucideIcon,
 } from "lucide-react";
 
@@ -275,6 +280,11 @@ export const Icons: Record<string, LucideIcon> = {
   Puzzle,
   Users,
   Power,
+  Link2,
+  WifiOff,
+  CheckSquare,
+  Inbox,
+  Beaker,
 };
 
 export type IconName = keyof typeof Icons;
