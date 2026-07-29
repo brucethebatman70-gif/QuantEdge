@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./design-system.css";
 
 @theme inline {
   --color-background: var(--background);
@@ -31,6 +32,21 @@
   --color-glass-border: var(--glass-border);
   --color-glass-highlight: var(--glass-highlight);
   --color-glass-glow: var(--glass-glow);
+  --color-ai: var(--ai);
+  --color-ai-foreground: var(--ai-foreground);
+  --color-ai-subtle: var(--ai-subtle);
+  --color-ai-glow: var(--ai-glow);
+  --color-analytics: var(--analytics);
+  --color-analytics-foreground: var(--analytics-foreground);
+  --color-analytics-subtle: var(--analytics-subtle);
+  --color-analytics-glow: var(--analytics-glow);
+  --color-crimson: var(--crimson);
+  --color-crimson-subtle: var(--crimson-subtle);
+  --color-amber: var(--amber);
+  --color-amber-subtle: var(--amber-subtle);
+  --color-emerald-deep: var(--emerald-deep);
+  --color-emerald-subtle: var(--emerald-subtle);
+  --color-cool-gray: var(--cool-gray);
 
   --font-sans: var(--font-sans-family);
   --font-mono: var(--font-mono-family);
@@ -46,9 +62,15 @@
   --glass-noise: linear-gradient(45deg, transparent 48%, rgba(255,255,255,0.01) 50%, transparent 52%);
 
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
 
   --animate-ambient: ambient 20s ease-in-out infinite;
   --animate-ambient-slow: ambient 30s ease-in-out infinite;
+  --animate-breathe: breathe 3s ease-in-out infinite;
+  --animate-pulse-soft: pulse-soft 2.5s ease-in-out infinite;
+  --animate-scale-in: scale-in 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-fade-in: fade-in 0.5s ease-in-out;
+  --animate-slide-up: slide-up 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 :root {

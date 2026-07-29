@@ -1,0 +1,346 @@
+/* ════════════════════════════════════════════
+   QuantEdge Design System — Visual Language
+   ════════════════════════════════════════════
+   Every token, utility, and pattern belongs to
+   one unified identity. Nothing is accidental.
+   ════════════════════════════════════════════ */
+
+/* ── Extended Semantic Colors ── */
+:root {
+  --ai: #8b5cf6;
+  --ai-foreground: #ffffff;
+  --ai-subtle: rgba(139, 92, 246, 0.08);
+  --ai-glow: rgba(139, 92, 246, 0.15);
+
+  --analytics: #3b82f6;
+  --analytics-foreground: #ffffff;
+  --analytics-subtle: rgba(59, 130, 246, 0.08);
+  --analytics-glow: rgba(59, 130, 246, 0.15);
+
+  --crimson: #dc2626;
+  --crimson-subtle: rgba(220, 38, 38, 0.08);
+
+  --amber: #d97706;
+  --amber-subtle: rgba(217, 119, 6, 0.08);
+
+  --emerald-deep: #059669;
+  --emerald-subtle: rgba(5, 150, 105, 0.08);
+
+  --cool-gray: #a1a1aa;
+
+  /* ── Elevation & Shadow System ── */
+  --elevation-flat: 0 0 0 0 transparent;
+  --elevation-raised: 0 1px 2px rgba(0, 0, 0, 0.03), 0 1px 4px rgba(0, 0, 0, 0.03);
+  --elevation-card: 0 1px 2px rgba(0, 0, 0, 0.02), 0 4px 8px rgba(0, 0, 0, 0.04),
+    0 12px 24px rgba(0, 0, 0, 0.06);
+  --elevation-floating: 0 2px 4px rgba(0, 0, 0, 0.04), 0 8px 16px rgba(0, 0, 0, 0.06),
+    0 24px 48px rgba(0, 0, 0, 0.08), 0 40px 80px rgba(0, 0, 0, 0.04);
+  --elevation-modal: 0 4px 8px rgba(0, 0, 0, 0.04), 0 16px 32px rgba(0, 0, 0, 0.08),
+    0 48px 96px rgba(0, 0, 0, 0.12);
+  --elevation-tooltip: 0 4px 12px rgba(0, 0, 0, 0.08), 0 8px 24px rgba(0, 0, 0, 0.06);
+
+  /* Directional ambient shadows */
+  --shadow-ambient-top: 0 -1px 3px rgba(0, 0, 0, 0.02);
+  --shadow-ambient-bottom: 0 1px 3px rgba(0, 0, 0, 0.02);
+  --shadow-directional: 0 4px 12px rgba(0, 0, 0, 0.06), 0 2px 4px rgba(0, 0, 0, 0.03);
+
+  /* ── Spacing Scale (8pt Grid) ── */
+  --space-05: 4px;
+  --space-1: 8px;
+  --space-1_5: 12px;
+  --space-2: 16px;
+  --space-2_5: 20px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 40px;
+  --space-6: 48px;
+  --space-7: 64px;
+  --space-8: 80px;
+  --space-9: 96px;
+  --space-10: 128px;
+  --space-11: 160px;
+  --space-12: 192px;
+
+  /* ── Border System ── */
+  --border-hairline: 0.5px solid var(--border);
+  --border-hairline-subtle: 0.5px solid var(--border-subtle);
+  --border-premium: 1px solid var(--glass-border);
+  --border-premium-top: 1px solid var(--glass-highlight);
+  --border-active: 1px solid var(--ring);
+
+  /* ── Typography Scale ── */
+  --text-display: 3.5rem;
+  --text-display-lh: 1.05;
+  --text-display-ls: -0.03em;
+  --text-hero: 2.5rem;
+  --text-hero-lh: 1.1;
+  --text-hero-ls: -0.025em;
+  --text-heading: 1.5rem;
+  --text-heading-lh: 1.2;
+  --text-heading-ls: -0.02em;
+  --text-subheading: 1.125rem;
+  --text-subheading-lh: 1.3;
+  --text-subheading-ls: -0.01em;
+  --text-body: 0.9375rem;
+  --text-body-lh: 1.6;
+  --text-caption: 0.8125rem;
+  --text-caption-lh: 1.5;
+  --text-small: 0.75rem;
+  --text-small-lh: 1.4;
+  --text-tiny: 0.6875rem;
+  --text-tiny-lh: 1.3;
+  --text-label: 0.6875rem;
+  --text-label-ls: 0.06em;
+
+  /* ── Layout Constraints ── */
+  --layout-max: 1280px;
+  --layout-wide: 1440px;
+  --layout-narrow: 720px;
+  --layout-gutter: var(--space-2);
+  --layout-gutter-lg: var(--space-4);
+
+  /* ── Card System Tokens ── */
+  --card-radius: var(--radius-xl);
+  --card-radius-lg: var(--radius-2xl);
+  --card-padding: var(--space-2);
+  --card-padding-lg: var(--space-3);
+  --card-gap: var(--space-1_5);
+}
+
+/* ── Dark Mode Overrides ── */
+.dark {
+  --elevation-raised: 0 1px 2px rgba(0, 0, 0, 0.2), 0 1px 4px rgba(0, 0, 0, 0.15);
+  --elevation-card: 0 1px 2px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.2),
+    0 12px 24px rgba(0, 0, 0, 0.25);
+  --elevation-floating: 0 2px 4px rgba(0, 0, 0, 0.15), 0 8px 16px rgba(0, 0, 0, 0.2),
+    0 24px 48px rgba(0, 0, 0, 0.25), 0 40px 80px rgba(0, 0, 0, 0.15);
+  --elevation-modal: 0 4px 8px rgba(0, 0, 0, 0.2), 0 16px 32px rgba(0, 0, 0, 0.3),
+    0 48px 96px rgba(0, 0, 0, 0.4);
+  --elevation-tooltip: 0 4px 12px rgba(0, 0, 0, 0.2), 0 8px 24px rgba(0, 0, 0, 0.15);
+
+  --shadow-ambient-top: 0 -1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-ambient-bottom: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-directional: 0 4px 12px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ════════════════════════════════════════════
+   TYPOGRAPHY UTILITY CLASSES
+   ════════════════════════════════════════════ */
+
+.display { font-size: var(--text-display); line-height: var(--text-display-lh); letter-spacing: var(--text-display-ls); }
+.hero { font-size: var(--text-hero); line-height: var(--text-hero-lh); letter-spacing: var(--text-hero-ls); }
+.heading { font-size: var(--text-heading); line-height: var(--text-heading-lh); letter-spacing: var(--text-heading-ls); }
+.subheading { font-size: var(--text-subheading); line-height: var(--text-subheading-lh); letter-spacing: var(--text-subheading-ls); }
+.body { font-size: var(--text-body); line-height: var(--text-body-lh); }
+.caption { font-size: var(--text-caption); line-height: var(--text-caption-lh); }
+.small { font-size: var(--text-small); line-height: var(--text-small-lh); }
+.tiny { font-size: var(--text-tiny); line-height: var(--text-tiny-lh); }
+.label { font-size: var(--text-label); letter-spacing: var(--text-label-ls); text-transform: uppercase; }
+
+/* ── Font Weight Utilities ── */
+.fw-400 { font-weight: 400; }
+.fw-500 { font-weight: 500; }
+.fw-600 { font-weight: 600; }
+
+/* ════════════════════════════════════════════
+   GRADIENT DIVIDER SYSTEM
+   ════════════════════════════════════════════ */
+
+.divider-gradient {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  border: none;
+}
+
+.divider-gradient-vertical {
+  width: 1px;
+  background: linear-gradient(180deg, transparent, var(--border), transparent);
+  border: none;
+}
+
+.divider-light {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
+  border: none;
+}
+
+.divider-accent {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
+  border: none;
+}
+
+.divider-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--muted-foreground);
+  font-size: var(--text-small);
+}
+
+.divider-label::before,
+.divider-label::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+}
+
+/* ════════════════════════════════════════════
+   SPACING UTILITIES
+   ════════════════════════════════════════════ */
+
+.section-space { padding-top: var(--space-10); padding-bottom: var(--space-10); }
+.section-space-sm { padding-top: var(--space-7); padding-bottom: var(--space-7); }
+.section-space-lg { padding-top: var(--space-12); padding-bottom: var(--space-12); }
+
+.content-gap { gap: var(--space-2); }
+.content-gap-lg { gap: var(--space-3); }
+.content-gap-xl { gap: var(--space-4); }
+
+/* ════════════════════════════════════════════
+   BACKGROUND PATTERNS
+   ════════════════════════════════════════════ */
+
+.bg-pattern-dots {
+  background-image: radial-gradient(circle, var(--border) 0.5px, transparent 0.5px);
+  background-size: 24px 24px;
+}
+
+.bg-pattern-lines {
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 20px,
+    var(--border-subtle) 20px,
+    var(--border-subtle) 21px
+  );
+}
+
+.bg-pattern-grid {
+  background-image:
+    linear-gradient(90deg, var(--border-subtle) 0.5px, transparent 0.5px),
+    linear-gradient(180deg, var(--border-subtle) 0.5px, transparent 0.5px);
+  background-size: 32px 32px;
+}
+
+.bg-pattern-cross {
+  background-image:
+    linear-gradient(45deg, var(--border-subtle) 0.5px, transparent 0.5px),
+    linear-gradient(-45deg, var(--border-subtle) 0.5px, transparent 0.5px);
+  background-size: 16px 16px;
+}
+
+.bg-pattern-waves {
+  background: repeating-linear-gradient(
+    -3deg,
+    transparent,
+    transparent 40px,
+    var(--border-subtle) 40px,
+    var(--border-subtle) 41px
+  );
+}
+
+/* ── Ambient Background Glow Variants ── */
+.bg-ambient-primary {
+  background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0, 212, 170, 0.06) 0%, transparent 70%);
+}
+
+.bg-ambient-ai {
+  background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(139, 92, 246, 0.05) 0%, transparent 70%);
+}
+
+.bg-ambient-analytics {
+  background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(59, 130, 246, 0.05) 0%, transparent 70%);
+}
+
+/* ════════════════════════════════════════════
+   SURFACE DEPTH UTILITIES
+   ════════════════════════════════════════════ */
+
+.elevation-flat { box-shadow: var(--elevation-flat); }
+.elevation-raised { box-shadow: var(--elevation-raised); }
+.elevation-card { box-shadow: var(--elevation-card); }
+.elevation-floating { box-shadow: var(--elevation-floating); }
+.elevation-modal { box-shadow: var(--elevation-modal); }
+.elevation-tooltip { box-shadow: var(--elevation-tooltip); }
+
+/* ════════════════════════════════════════════
+   CARD SYSTEM EXTENSIONS
+   ════════════════════════════════════════════ */
+
+.card-premium {
+  border-radius: var(--card-radius);
+  padding: var(--card-padding);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-premium:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--elevation-floating);
+}
+
+/* ════════════════════════════════════════════
+   MOTION & MICRO-INTERACTION UTILITIES
+   ════════════════════════════════════════════ */
+
+.hover-lift {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hover-lift:hover {
+  transform: translateY(-1px);
+}
+
+.hover-glow {
+  transition: box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hover-glow:hover {
+  box-shadow: 0 0 20px -8px var(--primary), 0 0 40px -16px var(--primary);
+}
+
+.transition-premium {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ════════════════════════════════════════════
+   ANIMATION KEYFRAMES
+   ════════════════════════════════════════════ */
+
+@keyframes breathe {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@keyframes slide-up {
+  0% { opacity: 0; transform: translateY(12px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-down {
+  0% { opacity: 0; transform: translateY(-12px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scale-in {
+  0% { opacity: 0; transform: scale(0.96); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.7; }
+}
+
+/* Utility animation classes */
+.animate-breathe { animation: breathe 3s ease-in-out infinite; }
+.animate-slide-up { animation: slide-up 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+.animate-scale-in { animation: scale-in 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+.animate-fade-in { animation: fade-in 0.5s ease-in-out; }
+.animate-pulse-soft { animation: pulse-soft 2.5s ease-in-out infinite; }

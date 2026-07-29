@@ -49,7 +49,7 @@ export function ProblemSection() {
                 whileInView={{ opacity: 1, scaleX: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                className="w-12 h-[1px] bg-white/[0.08] mx-auto mb-14"
+                className="w-12 h-px bg-gradient-to-r from-transparent via-white/[0.08] to-transparent mx-auto mb-14"
               />
             )}
             {truth.isClimax ? (
