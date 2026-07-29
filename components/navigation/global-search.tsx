@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/cn";
 import { Icons } from "@/lib/icons";
 import { NAV_ITEMS } from "./nav-types";
+import { useCommandStore } from "./command-store";
 import { useNavigationStore } from "./navigation-store";
 import { useRouter } from "next/navigation";
 
@@ -39,7 +40,7 @@ export function GlobalSearch({ collapsed }: GlobalSearchProps) {
     return (
       <div className="px-2 pb-1">
         <button
-          onClick={() => setSearchOpen(true)}
+          onClick={() => useCommandStore.getState().setOpen(true)}
           className="flex h-10 w-10 items-center justify-center mx-auto rounded-xl hover:bg-white/[0.04] transition-colors"
         >
           <Icons.Search className="w-4 h-4 opacity-60" />

@@ -26,8 +26,6 @@ interface NavigationState {
   markAllRead: () => void;
   searchOpen: boolean;
   setSearchOpen: (open: boolean) => void;
-  commandPaletteOpen: boolean;
-  setCommandPaletteOpen: (open: boolean) => void;
 }
 
 const STORAGE_KEY = "qe-nav";
@@ -118,7 +116,5 @@ export const useNavigationStore = create<NavigationState>((set, get) => {
 
     searchOpen: false,
     setSearchOpen: (open) => set({ searchOpen: open }),
-    commandPaletteOpen: false,
-    setCommandPaletteOpen: (open) => set({ commandPaletteOpen: open }),
   };
 });

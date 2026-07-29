@@ -6,7 +6,7 @@ import { cn } from "@/lib/cn";
 import { Icons } from "@/lib/icons";
 import { useTheme } from "@/lib/theme-store";
 import { useMounted } from "@/hooks/use-mounted";
-import { useNavigationStore } from "./navigation-store";
+import { useCommandStore } from "./command-store";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/components/ui/tooltip";
 
@@ -18,12 +18,12 @@ export function UserProfile({ collapsed }: UserProfileProps) {
   const [open, setOpen] = useState(false);
   const { theme, setTheme } = useTheme();
   const mounted = useMounted();
-  const { setCommandPaletteOpen } = useNavigationStore();
+  const { setOpen: setPaletteOpen } = useCommandStore();
 
   const menuItems = [
     { icon: "User", label: "Profile", shortcut: "" },
     { icon: "Settings", label: "Settings", shortcut: "G S" },
-    { icon: "Keyboard", label: "Shortcuts", shortcut: "Ctrl+K", action: () => setCommandPaletteOpen(true) },
+    { icon: "Keyboard", label: "Shortcuts", shortcut: "Ctrl+K", action: () => setPaletteOpen(true) },
     { icon: "HelpCircle", label: "Help & Support", shortcut: "" },
   ];
 
