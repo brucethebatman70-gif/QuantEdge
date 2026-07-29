@@ -5,6 +5,7 @@ import { useMounted } from "@/hooks/use-mounted";
 import { Button } from "@/components/ui/button";
 import { Icons } from "@/lib/icons";
 import { brand } from "@/config/brand";
+import { useNotificationStore } from "@/components/notification";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,6 +22,7 @@ interface NavbarProps {
 
 export function Navbar({ title }: NavbarProps) {
   const { theme, setTheme } = useTheme();
+  const notif = useNotificationStore();
   const mounted = useMounted();
 
   return (
@@ -45,8 +47,11 @@ export function Navbar({ title }: NavbarProps) {
           ))}
         </Button>
 
-        <Button variant="ghost" size="icon-xs" className="opacity-60 hover:opacity-100">
+        <Button variant="ghost" size="icon-xs" className="opacity-60 hover:opacity-100 relative" onClick={() => notif.toggleCenter()}>
           <Icons.Bell className="h-3.5 w-3.5" />
+          {notif.unreadCount > 0 && (
+            <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-error" />
+          )}
         </Button>
 
         <DropdownMenu>

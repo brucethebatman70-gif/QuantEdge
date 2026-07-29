@@ -5,7 +5,7 @@ import { ThemeProvider } from "./theme-provider";
 import { AnalyticsProvider } from "./analytics-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { CommandPalette } from "@/components/navigation/command-palette";
-import { Toaster } from "sonner";
+import { ToastContainer, NotificationKeyboardShortcut } from "@/components/notification";
 
 export function AppProvider({ children }: { children: ReactNode }) {
   return (
@@ -14,17 +14,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
         <AnalyticsProvider>
           {children}
           <CommandPalette />
+          <NotificationKeyboardShortcut />
+          <ToastContainer />
         </AnalyticsProvider>
-        <Toaster
-          position="bottom-right"
-          toastOptions={{
-            style: {
-              background: "var(--card)",
-              color: "var(--card-foreground)",
-              border: "1px solid var(--border)",
-            },
-          }}
-        />
       </TooltipProvider>
     </ThemeProvider>
   );

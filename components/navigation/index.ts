@@ -4,4 +4,4 @@ export { CommandPalette } from "./command-palette";
 export { useNavigationStore } from "./navigation-store";
 export { useCommandStore } from "./command-store";
 export { GlobalSearch } from "./global-search";
-export type { SidebarMode, NavItem, NavSection, NavBadge, FavoriteItem, RecentPage, NotificationItem } from "./nav-types";
+export type { SidebarMode, NavItem, NavSection, NavBadge, FavoriteItem, RecentPage } from "./nav-types";

@@ -12,12 +12,13 @@ import { WorkspaceSwitcher } from "./workspace-switcher";
 import { FavoritesList } from "./favorites-list";
 import { RecentPages } from "./recent-pages";
 import { GlobalSearch } from "./global-search";
-import { NotificationsCenter } from "./notifications-center";
+import { NotificationBadge, NotificationCenter, useNotificationStore } from "@/components/notification";
 import { UserProfile } from "./user-profile";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 export function FloatingSidebar() {
   const { mode, setMode, hovered, setHovered } = useNavigationStore();
+  const notif = useNotificationStore();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => { setMounted(true); }, []);
@@ -144,7 +145,7 @@ export function FloatingSidebar() {
 
         {/* Notifications */}
         <div className="shrink-0 pt-0.5 pb-0.5">
-          <NotificationsCenter collapsed={!isExpanded} />
+          <NotificationBadge collapsed={!isExpanded} onClick={() => notif.toggleCenter()} />
         </div>
 
         {/* Divider */}
@@ -158,6 +159,13 @@ export function FloatingSidebar() {
 
       {/* Spacer for layout when collapsed */}
       <div style={{ width: isExpanded ? 244 : 80, flexShrink: 0 }} />
+
+      {/* Notification Center */}
+      <AnimatePresence>
+        {notif.centerOpen && (
+          <NotificationCenter onClose={() => notif.setCenterOpen(false)} />
+        )}
+      </AnimatePresence>
     </>
   );
 }

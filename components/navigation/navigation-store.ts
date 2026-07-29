@@ -1,7 +1,7 @@
 "use client";
 
 import { create } from "zustand";
-import type { SidebarMode, FavoriteItem, RecentPage, NotificationItem } from "./nav-types";
+import type { SidebarMode, FavoriteItem, RecentPage } from "./nav-types";
 
 interface NavigationState {
   mode: SidebarMode;
@@ -20,10 +20,6 @@ interface NavigationState {
   recentPages: RecentPage[];
   addRecentPage: (page: Omit<RecentPage, "visitedAt">) => void;
   clearRecent: () => void;
-  notifications: NotificationItem[];
-  unreadCount: number;
-  markRead: (id: string) => void;
-  markAllRead: () => void;
   searchOpen: boolean;
   setSearchOpen: (open: boolean) => void;
 }
@@ -100,19 +96,6 @@ export const useNavigationStore = create<NavigationState>((set, get) => {
         persist(s.favorites, []);
         return { recentPages: [] };
       }),
-
-    notifications: [],
-    unreadCount: 0,
-    markRead: (id) =>
-      set((s) => {
-        const next = s.notifications.map((n) => (n.id === id ? { ...n, read: true } : n));
-        return { notifications: next, unreadCount: next.filter((n) => !n.read).length };
-      }),
-    markAllRead: () =>
-      set((s) => ({
-        notifications: s.notifications.map((n) => ({ ...n, read: true })),
-        unreadCount: 0,
-      })),
 
     searchOpen: false,
     setSearchOpen: (open) => set({ searchOpen: open }),
