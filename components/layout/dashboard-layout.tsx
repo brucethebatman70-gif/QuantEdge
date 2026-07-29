@@ -3,7 +3,8 @@
 import type { ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sidebar } from "./sidebar";
+import { FloatingSidebar } from "@/components/navigation/floating-sidebar";
+import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
 import { Navbar } from "./navbar";
 import { pageTransition } from "@/lib/motion";
 
@@ -17,10 +18,13 @@ export function DashboardLayout({ children, title }: DashboardLayoutProps) {
 
   return (
     <div className="flex min-h-screen">
-      <Sidebar />
-      <div className="flex flex-1 flex-col pl-[244px] pr-3 pb-3 pt-0">
+      <FloatingSidebar />
+      <div className="flex flex-1 flex-col pr-3 pb-3 pt-0 min-w-0">
         <Navbar title={title} />
         <main className="flex-1 overflow-auto">
+          <div className="px-5 pt-2 pb-1">
+            <Breadcrumbs />
+          </div>
           <AnimatePresence mode="wait">
             <motion.div
               key={pathname}
@@ -28,7 +32,7 @@ export function DashboardLayout({ children, title }: DashboardLayoutProps) {
               initial="initial"
               animate="animate"
               exit="exit"
-              className="p-5 pt-4"
+              className="p-5 pt-3"
             >
               {children}
             </motion.div>
