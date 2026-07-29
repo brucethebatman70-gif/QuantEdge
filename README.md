@@ -59,7 +59,7 @@ my-app/
 │       ├── backtesting/      # Strategy backtesting with optimizer
 │       ├── coach/            # AI chat + insight cards
 │       ├── playbooks/        # Documented trading strategies
-│       ├── reports/          # Report generation
+│       ├── reports/          # Reports Center (builder, schedule, export, AI summary, history)
 │       ├── goals/            # Goals & Performance Center (goals, habits, achievements, AI coach, discipline)
 │       └── settings/         # App settings
 └── public/
@@ -126,6 +126,19 @@ npm run lint
 | `/reports` | Reports |
 | `/goals` | Goals & Performance Center |
 | `/settings` | Settings |
+
+## Reports Center
+
+| Module | Description |
+|--------|-------------|
+| **Report Builder** | Template-based builder with 6 report types (daily → yearly + custom), 16 configurable sections, 8 chart types, custom branding, date range picker, and saveable templates |
+| **Quick Report Cards** | 6 animated glass cards for one-click report generation by type |
+| **Report History** | Filtered/sortable history with search, status badges, quick actions (Download, Share, Delete), and chart type indicators |
+| **Report Preview** | Full report details with metrics grid, sections list, chart thumbnails, tags, file size, and download |
+| **Scheduled Reports** | CRUD for schedules with daily/weekly/monthly/quarterly/yearly frequency, toggle active/paused, delete |
+| **Export Center** | Format picker (PDF, CSV, Excel, JSON) with format descriptions and recent export jobs with processing states |
+| **AI Executive Summary** | 7-section AI-generated analysis (Performance, Strengths, Weaknesses, Recommendations, Risk Warnings, Next Week Focus, Monthly Action Plan) with expandable cards and score bars |
+| **Data layer** | `lib/reports/` — types, mock data (8 reports, 4 templates, 4 schedules, 6 exports), vanilla Proxy store |
 
 ## Goals & Performance Center
 

@@ -2,6 +2,7 @@ import {
   LayoutDashboard,
   BookOpen,
   BarChart3,
+  Minus,
   PlayCircle,
   FlaskConical,
   Bot,
@@ -48,6 +49,7 @@ import {
   Lock,
   Mail,
   Check,
+  CheckCheck,
   Sparkles,
   ArrowRight,
   Monitor,
@@ -124,13 +126,17 @@ import {
   Crown,
   PartyPopper,
   Copy,
+  Table,
+  Printer,
   type LucideIcon,
 } from "lucide-react";
 
 export const Icons: Record<string, LucideIcon> = {
+  CheckCheck,
   LayoutDashboard,
   BookOpen,
   BarChart3,
+  Minus,
   PlayCircle,
   FlaskConical,
   Bot,
@@ -253,6 +259,8 @@ export const Icons: Record<string, LucideIcon> = {
   Crown,
   PartyPopper,
   Copy,
+  Table,
+  Printer,
 };
 
 export type IconName = keyof typeof Icons;

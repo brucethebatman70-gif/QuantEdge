@@ -190,7 +190,7 @@ export const brand = {
     { label: "Analytics", href: "/analytics", icon: "BarChart3", shortcut: "G A" },
     { label: "Replay", href: "/replay", icon: "PlayCircle", shortcut: "G R" },
     { label: "Backtesting", href: "/backtesting", icon: "FlaskConical", shortcut: "G B" },
-    { label: "AI Coach", href: "/coach", icon: "Bot", shortcut: "G C" },
+    { label: "AI Copilot", href: "/copilot", icon: "Bot", shortcut: "G C" },
     { label: "Playbooks", href: "/playbooks", icon: "FileText", shortcut: "G P" },
     { label: "Reports", href: "/reports", icon: "PieChart", shortcut: "G R" },
     { label: "Import", href: "/import", icon: "Upload", shortcut: "G I" },
