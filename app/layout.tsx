@@ -64,7 +64,6 @@ export default function RootLayout({
         <div className="background-layers" aria-hidden="true">
           <div className="background-gradient" />
           <div className="background-noise" />
-          <div className="background-grid" />
           <div className="background-ambient" />
         </div>
         <AppProvider>{children}</AppProvider>
