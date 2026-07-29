@@ -1,6 +1,8 @@
 "use client";
 
+import { cn } from "@/lib/cn";
 import { motion } from "framer-motion";
+import { shimmerVariants } from "@/components/loading/skeleton-primitives";
 
 interface SkeletonProps {
   className?: string;
@@ -12,12 +14,13 @@ interface SkeletonProps {
 export function Skeleton({ className = "", width, height, rounded = true }: SkeletonProps) {
   return (
     <motion.div
-      className={`bg-gradient-to-r from-muted via-muted/60 to-muted bg-[length:200%_100%] ${rounded ? "rounded-lg" : ""} ${className}`}
+      className={cn(
+        "bg-gradient-to-r from-muted via-muted/50 to-muted bg-[length:200%_100%]",
+        rounded && "rounded-lg",
+        className
+      )}
       style={{ width, height }}
-      variants={{
-        initial: { backgroundPosition: "200% 0" },
-        animate: { backgroundPosition: "-200% 0", transition: { duration: 1.5, repeat: Infinity, ease: "linear" } },
-      }}
+      variants={shimmerVariants}
       initial="initial"
       animate="animate"
     />
@@ -26,7 +29,7 @@ export function Skeleton({ className = "", width, height, rounded = true }: Skel
 
 export function CardSkeleton({ className = "" }: { className?: string }) {
   return (
-    <div className={`rounded-xl border bg-card p-5 space-y-4 ${className}`}>
+    <div className={cn("rounded-xl border bg-card p-5 space-y-4", className)}>
       <div className="flex items-center justify-between">
         <Skeleton width="40%" height={16} />
         <Skeleton width={24} height={24} rounded />

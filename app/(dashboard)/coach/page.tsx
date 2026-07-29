@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Icons } from "@/lib/icons";
 import { mockAnalytics } from "@/lib/mock-data";
+import { AiLoading } from "@/components/loading/ai-loading";
 
 const aiResponses: Record<string, { bot: string }> = {
   "hello": { bot: "Hi! I'm your AI trading coach. I've analyzed your last 50 trades. Would you like a performance review?" },
@@ -26,17 +27,20 @@ export default function CoachPage() {
     { role: "bot", text: aiResponses["hello"].bot },
   ]);
   const [input, setInput] = useState("");
+  const [thinking, setThinking] = useState(false);
 
   const handleSend = () => {
     if (!input.trim()) return;
     const userText = input.trim();
     setMessages(prev => [...prev, { role: "user", text: userText }]);
     setInput("");
+    setThinking(true);
 
     setTimeout(() => {
       const key = userText.toLowerCase().includes("analyz") || userText.toLowerCase().includes("review") ? "yes" : "default";
       const response = aiResponses[key]?.bot || aiResponses["default"].bot;
       setMessages(prev => [...prev, { role: "bot", text: response }]);
+      setThinking(false);
     }, 800);
   };
 
@@ -61,6 +65,19 @@ export default function CoachPage() {
             <CardContent>
               <div className="flex h-[450px] flex-col rounded-lg border border-border/50">
                 <div className="flex-1 space-y-4 overflow-auto p-4">
+                  {thinking && (
+                    <div className="flex gap-3">
+                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+                        <Icons.Bot className="h-4 w-4 text-primary" />
+                      </div>
+                      <div className="rounded-lg p-3 w-full max-w-[80%]">
+                        <AiLoading
+                          stages={["Analyzing", "Processing", "Generating Response"]}
+                          autoProgress
+                        />
+                      </div>
+                    </div>
+                  )}
                   {messages.map((msg, i) => (
                     <div key={i} className={`flex gap-3 ${msg.role === "user" ? "justify-end" : ""}`}>
                       {msg.role === "bot" && (

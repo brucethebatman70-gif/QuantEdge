@@ -484,19 +484,32 @@ body {
   background: linear-gradient(
     90deg,
     var(--glass-surface) 0%,
-    rgba(255,255,255,0.04) 50%,
+    rgba(255,255,255,0.05) 50%,
     var(--glass-surface) 100%
   );
   background-size: 200% 100%;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid var(--glass-border);
-  animation: shimmer 1.8s ease-in-out infinite;
+  animation: shimmer 2.2s ease-in-out infinite;
 }
 
 @keyframes shimmer {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
+}
+
+/* ── Progressive skeleton entrance ── */
+@keyframes skeleton-fade-in {
+  0% { opacity: 0; transform: translateY(8px); filter: blur(4px); }
+  100% { opacity: 1; transform: translateY(0); filter: blur(0px); }
+}
+
+/* ── Loading bar ── */
+@keyframes loading-bar {
+  0% { transform: scaleX(0); transform-origin: left; }
+  50% { transform: scaleX(0.8); transform-origin: left; }
+  100% { transform: scaleX(0); transform-origin: right; }
 }
 
 /* ── Glass notification / toast ── */
